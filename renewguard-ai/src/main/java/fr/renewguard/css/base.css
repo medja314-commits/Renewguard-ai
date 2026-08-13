@@ -1,0 +1,398 @@
+.root {
+    -fx-background-color: #0A0E14;
+    -fx-font-family: "Inter";
+    -fx-font-size: 13px;
+    -fx-text-fill: #F5F7FA;
+    -fx-focus-color: #3B9DFF;
+    -fx-faint-focus-color: transparent;
+}
+ 
+/* ── Button reset ──────────────────────────────────────────────────── */
+ 
+.button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+    -fx-focus-traversable: true;
+}
+ 
+.button:focused {
+    -fx-effect: dropshadow(gaussian, rgba(59, 157, 255, 0.55), 6, 0, 0, 0);
+}
+ 
+/* ── TextField / PasswordField reset ───────────────────────────────── */
+ 
+.text-input {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+ 
+.text-input:focused {
+    -fx-background-insets: 0;
+}
+ 
+/* ── TableView reset ────────────────────────────────────────────────── */
+ 
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: #1E2A3A;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+ 
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+ 
+.table-view .column-header-background {
+    -fx-background-color: rgba(7, 10, 15, 0.62);
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+ 
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #1E2A3A transparent;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+}
+ 
+.table-view .column-header .label {
+    -fx-text-fill: #8B93A7;
+    -fx-font-size: 10px;
+    -fx-font-weight: 700;
+    -fx-padding: 12 16 12 16;
+    -fx-alignment: CENTER_LEFT;
+}
+ 
+.table-view .filler {
+    -fx-background-color: rgba(7, 10, 15, 0.62);
+    -fx-border-color: transparent transparent #1E2A3A transparent;
+    -fx-border-width: 1;
+}
+ 
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #1E2A3A transparent;
+    -fx-border-width: 1;
+    -fx-cell-size: 50px;
+    -fx-text-fill: #F5F7FA;
+    -fx-padding: 0;
+}
+ 
+.table-row-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.025);
+}
+ 
+.table-row-cell:selected {
+    -fx-background-color: rgba(34, 211, 165, 0.07);
+}
+ 
+.table-row-cell:selected .label {
+    -fx-text-fill: #F5F7FA;
+}
+ 
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+ 
+.table-cell {
+    -fx-text-fill: #F5F7FA;
+    -fx-font-size: 13px;
+    -fx-padding: 0 16 0 16;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+ 
+/* ── ScrollPane reset ───────────────────────────────────────────────── */
+ 
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+ 
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+ 
+.scroll-pane .content {
+    -fx-background-color: transparent;
+}
+ 
+/* ── Scrollbar ──────────────────────────────────────────────────────── */
+ 
+.scroll-bar:vertical {
+    -fx-pref-width: 4;
+    -fx-background-color: transparent;
+    -fx-background-radius: 2;
+    -fx-padding: 0;
+}
+ 
+.scroll-bar:horizontal {
+    -fx-pref-height: 4;
+    -fx-background-color: transparent;
+    -fx-background-radius: 2;
+    -fx-padding: 0;
+}
+ 
+.scroll-bar .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+ 
+.scroll-bar .track-background {
+    -fx-background-color: transparent;
+}
+ 
+.scroll-bar .thumb {
+    -fx-background-color: #2A3342;
+    -fx-background-radius: 2;
+    -fx-border-color: transparent;
+}
+ 
+.scroll-bar .thumb:hover {
+    -fx-background-color: #3B4A5E;
+}
+ 
+.scroll-bar .thumb:pressed {
+    -fx-background-color: #22D3A5;
+}
+ 
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-padding: 0;
+}
+ 
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+ 
+/* ── ListView reset ─────────────────────────────────────────────────── */
+ 
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+ 
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #1E2A3A transparent;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+    -fx-text-fill: #F5F7FA;
+}
+ 
+.list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.025);
+}
+ 
+.list-cell:selected {
+    -fx-background-color: rgba(34, 211, 165, 0.07);
+    -fx-text-fill: #F5F7FA;
+}
+ 
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+ 
+/* ── Separator ──────────────────────────────────────────────────────── */
+ 
+.separator .line {
+    -fx-border-color: #1E2A3A;
+    -fx-border-width: 1 0 0 0;
+}
+ 
+/* ── SplitPane ──────────────────────────────────────────────────────── */
+ 
+.split-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+ 
+.split-pane-divider {
+    -fx-background-color: #1E2A3A;
+    -fx-pref-width: 1;
+    -fx-pref-height: 1;
+    -fx-padding: 0;
+}
+ 
+.split-pane:horizontal > .split-pane-divider {
+    -fx-pref-width: 1;
+}
+ 
+.split-pane:vertical > .split-pane-divider {
+    -fx-pref-height: 1;
+}
+ 
+/* ── Tooltip ────────────────────────────────────────────────────────── */
+ 
+.tooltip {
+    -fx-background-color: #0F1420;
+    -fx-background-radius: 8;
+    -fx-border-color: #2A3342;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-text-fill: #F5F7FA;
+    -fx-font-size: 11px;
+    -fx-font-family: "Inter";
+    -fx-padding: 5 10 5 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.52), 10, 0, 0, 3);
+}
+ 
+/* ── ContextMenu ────────────────────────────────────────────────────── */
+ 
+.context-menu {
+    -fx-background-color: #0F1420;
+    -fx-background-radius: 10;
+    -fx-border-color: #2A3342;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.62), 20, 0, 0, 6);
+}
+ 
+.context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: 7;
+    -fx-padding: 7 14 7 14;
+}
+ 
+.context-menu .menu-item .label {
+    -fx-text-fill: #F5F7FA;
+    -fx-font-size: 12px;
+    -fx-font-family: "Inter";
+}
+ 
+.context-menu .menu-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+}
+ 
+.context-menu .menu-item:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+}
+ 
+.context-menu .separator .line {
+    -fx-border-color: #1E2A3A;
+    -fx-border-width: 1 0 0 0;
+}
+ 
+/* ── ProgressBar ────────────────────────────────────────────────────── */
+ 
+.progress-bar .track {
+    -fx-background-color: #1E2A3A;
+    -fx-background-radius: 3;
+    -fx-border-color: transparent;
+}
+ 
+.progress-bar .bar {
+    -fx-background-color: #22D3A5;
+    -fx-background-radius: 3;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+ 
+/* ── MenuButton / ComboBox reset ────────────────────────────────────── */
+ 
+.combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 8;
+    -fx-border-color: #2A3342;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-text-fill: #F5F7FA;
+    -fx-font-size: 13px;
+    -fx-padding: 0;
+}
+ 
+.combo-box .list-cell {
+    -fx-text-fill: #F5F7FA;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 7 10 7 10;
+}
+ 
+.combo-box-popup .list-view {
+    -fx-background-color: #0F1420;
+    -fx-border-color: #2A3342;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.55), 16, 0, 0, 4);
+}
+ 
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+}
+ 
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: rgba(34, 211, 165, 0.10);
+    -fx-text-fill: #22D3A5;
+}
+ 
+/* ── Chart base ─────────────────────────────────────────────────────── */
+ 
+.chart {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+ 
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+ 
+.chart-horizontal-grid-lines {
+    -fx-stroke: rgba(42, 51, 66, 0.5);
+    -fx-stroke-dash-array: 4 4;
+}
+ 
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+ 
+.chart-alternative-row-fill {
+    -fx-fill: transparent;
+}
+ 
+.chart-alternative-column-fill {
+    -fx-fill: transparent;
+}
+ 
+.axis {
+    -fx-tick-label-fill: #8B93A7;
+    -fx-tick-mark-visible: false;
+    -fx-minor-tick-visible: false;
+}
+ 
+.axis-label {
+    -fx-text-fill: #8B93A7;
+    -fx-font-size: 10px;
+}
+ 
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+ 
+.chart-legend-item {
+    -fx-text-fill: #8B93A7;
+    -fx-font-size: 11px;
+}
