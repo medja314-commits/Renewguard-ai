@@ -11,6 +11,10 @@ Ce guide t'accompagne pas à pas pour faire tourner l'application sur ta machine
 
 ---
 
+## Tu préfères éviter WSL ? → [Va directement à l'Option B](#option-b--installation-windows-native-sans-wsl)
+
+---
+
 ## Étape 1 — Installer WSL (Windows uniquement)
 
 WSL (Windows Subsystem for Linux) permet de faire tourner un vrai environnement Linux directement sur Windows, sans machine virtuelle séparée. C'est ce qui nous évite les galères d'installation Java/Maven directement sous Windows.
@@ -156,6 +160,92 @@ puis, dans un second terminal :
 cd ~/renewguard-ai/Renewguard-ai
 mvn javafx:run                   # terminal 2
 ```
+
+---
+
+## Option B — Installation Windows native, sans WSL
+
+> ⚠️ **À savoir avant de commencer** : cette voie a été testée et s'est révélée plus fragile que WSL (les gestionnaires de paquets Windows comme `winget` et `chocolatey` ont échoué lors de nos tests). On privilégie donc ici les **installateurs graphiques officiels** plutôt que des commandes — plus fiable, même si un peu plus manuel. Si tu bloques quelque part, WSL (Option A ci-dessus) reste la solution la plus simple en dernier recours.
+
+### B1 — Installer Git
+
+1. Télécharge et installe : https://git-scm.com/download/win
+2. Laisse toutes les options par défaut pendant l'installation.
+3. Redémarre VS Code une fois l'installation terminée.
+
+### B2 — Installer Java 21 (JDK)
+
+1. Va sur https://adoptium.net
+2. Choisis **Version 21 (LTS)**, package type **JDK**, pour Windows.
+3. Télécharge le fichier `.msi` et lance-le.
+4. **Important** : pendant l'installation, quand on te propose des options, coche bien **"Set JAVA_HOME variable"** et **"Add to PATH"** si ces cases apparaissent — l'installateur Adoptium les configure automatiquement pour toi, contrairement à une installation manuelle.
+5. Une fois installé, **ferme et rouvre VS Code** (et tout terminal ouvert) pour que les nouvelles variables soient prises en compte.
+
+**Vérifie** : ouvre un terminal dans VS Code (Terminal → Nouveau terminal, type "Command Prompt" ou "PowerShell") et tape :
+```
+java -version
+```
+Tu dois voir la version 21 s'afficher.
+
+### B3 — Installer Maven
+
+1. Va sur https://maven.apache.org/download.cgi
+2. Télécharge le fichier **Binary zip archive** (ex. `apache-maven-3.9.x-bin.zip`).
+3. Extrais ce zip dans un dossier simple, par exemple `C:\maven` (clic droit → "Extraire tout...").
+4. Ajoute Maven au PATH **via l'interface graphique Windows** (plus fiable qu'en ligne de commande) :
+   - Recherche "Variables d'environnement" dans le menu Démarrer, ouvre **"Modifier les variables d'environnement système"**.
+   - Clique sur **"Variables d'environnement..."**.
+   - Dans la liste du bas ("Variables système"), sélectionne **Path**, clique **Modifier**.
+   - Clique **Nouveau**, ajoute le chemin vers le sous-dossier `bin` de Maven, par exemple `C:\maven\apache-maven-3.9.x\bin`.
+   - Valide avec OK partout.
+5. **Ferme et rouvre VS Code** entièrement (pas juste le terminal) pour que le changement soit pris en compte.
+
+**Vérifie** :
+```
+mvn -version
+```
+
+### B4 — Installer Python
+
+1. Va sur https://www.python.org/downloads/
+2. Télécharge la dernière version pour Windows et lance l'installateur.
+3. **Important** : sur le tout premier écran de l'installateur, coche bien la case **"Add python.exe to PATH"** en bas avant de cliquer sur "Install Now" — c'est l'erreur la plus fréquente si elle est oubliée.
+4. **Ferme et rouvre VS Code** ensuite.
+
+**Vérifie** :
+```
+python --version
+```
+(sous Windows natif, c'est `python`, pas `python3`)
+
+### B5 — Cloner le dépôt depuis VS Code (sans ligne de commande)
+
+1. Ouvre VS Code.
+2. Clique sur l'icône **Source Control** dans la barre de gauche (icône de branche Git), ou `Ctrl+Shift+G`.
+3. Clique sur **"Clone Repository"**.
+4. Colle l'URL du dépôt Git, choisis un dossier de destination simple (ex. `C:\Projets\Renewguard-ai`).
+5. Une fois cloné, VS Code te propose d'ouvrir le dossier — accepte.
+6. En bas à gauche de VS Code, clique sur le nom de branche affiché, puis choisis **`mira-frontend`** dans la liste (ou demande à l'équipe la branche à jour).
+
+### B6 — Lancer le serveur mock
+
+Ouvre un terminal dans VS Code (Terminal → Nouveau terminal, type "Command Prompt") :
+```
+pip install fastapi uvicorn
+python mock_server.py
+```
+(pas de `--break-system-packages` nécessaire sous Windows natif, contrairement à WSL/Linux)
+
+Laisse ce terminal ouvert et actif.
+
+### B7 — Lancer l'application JavaFX
+
+Ouvre un **second** terminal dans VS Code (clique sur le `+` dans le panneau terminal) :
+```
+mvn javafx:run
+```
+
+La fenêtre de l'application doit s'ouvrir directement (pas besoin de configuration d'affichage supplémentaire sous Windows natif, contrairement à WSL).
 
 ---
 
