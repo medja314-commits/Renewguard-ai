@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.chart.*?>
+
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+
+fx:controller="fr.renewguard.controller.DashboardController"
+
+styleClass="screen-root"
+
+spacing="16"
+
+style="-fx-padding: 24; -fx-background-color: transparent;">
+
+<!-- ── Row 1 : Status bar ────────────────────────────────────── -->
+
+<HBox alignment="CENTER_LEFT" spacing="10">
+
+<Circle fx:id="statusDot" radius="4.5"
+
+style="-fx-fill: #22D3A5;
+
+-fx-effect: dropshadow(gaussian,rgba(34,211,165,0.7),6,0,0,0);"/>
+
+<Label text="Tour Centrale --- Paris 15e"
+
+style="-fx-font-size: 13px; -fx-font-weight: 500; -fx-text-fill: #F5F7FA;"/>
+
+<Label fx:id="statusBadge" text="OPÉRATIONNEL" styleClass="badge-success"/>
+
+<Region HBox.hgrow="ALWAYS"/>
+
+<Button fx:id="systemViewBtn" text="Vue système"
+
+styleClass="btn-secondary" onAction="#onSystemViewToggle"/>
+
+</HBox>
+
+<!-- ── Row 2 : System view (hidden by default) ───────────────── -->
+
+<VBox fx:id="systemViewPanel" styleClass="glass-card"
+
+visible="false" managed="false" spacing="0">
+
+<Label text="Architecture système --- Flux de données temps réel"
+
+style="-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #3B9DFF;
+
+-fx-padding: 14 18 10 18;"/>
+
+<HBox alignment="CENTER_LEFT" spacing="6"
+
+style="-fx-padding: 0 18 16 18;">
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="☀️" styleClass="system-node-icon"/>
+
+<Label text="Panneaux solaires" styleClass="system-node-label"/>
+
+<Label text="48 panneaux · 18,4 kW" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #22D3A5;"/>
+
+</VBox>
+
+<Label text="→" styleClass="system-arrow"/>
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="📡" styleClass="system-node-icon"/>
+
+<Label text="Capteurs IoT ESP32" styleClass="system-node-label"/>
+
+<Label text="12 nœuds · actifs" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #22D3A5;"/>
+
+</VBox>
+
+<Label text="→" styleClass="system-arrow"/>
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="🔄" styleClass="system-node-icon"/>
+
+<Label text="Collecte temps réel" styleClass="system-node-label"/>
+
+<Label text="Latence 42 ms" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #22D3A5;"/>
+
+</VBox>
+
+<Label text="→" styleClass="system-arrow"/>
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="☁️" styleClass="system-node-icon"/>
+
+<Label text="API REST FastAPI" styleClass="system-node-label"/>
+
+<Label text="Sync 99,8% uptime" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #22D3A5;"/>
+
+</VBox>
+
+<Label text="→" styleClass="system-arrow"/>
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="🧠" styleClass="system-node-icon"/>
+
+<Label text="Machine Learning" styleClass="system-node-label"/>
+
+<Label text="Modèle v3.1 actif" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #3B9DFF;"/>
+
+</VBox>
+
+<Label text="→" styleClass="system-arrow"/>
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="⚡" styleClass="system-node-icon"/>
+
+<Label text="Décisions IA" styleClass="system-node-label"/>
+
+<Label text="7 actions aujourd'hui" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #3B9DFF;"/>
+
+</VBox>
+
+<Label text="→" styleClass="system-arrow"/>
+
+<VBox alignment="CENTER" spacing="3" styleClass="system-node">
+
+<Label text="🔌" styleClass="system-node-icon"/>
+
+<Label text="Relais équipements" styleClass="system-node-label"/>
+
+<Label text="23 relais · 2 OFF" styleClass="system-node-sub"/>
+
+<Circle radius="3" style="-fx-fill: #FFA53E;"/>
+
+</VBox>
+
+</HBox>
+
+</VBox>
+
+<!-- ── Row 3 : 4 KPI cards ───────────────────────────────────── -->
+
+<HBox spacing="16">
+
+<StackPane fx:id="kpiSolarSlot" HBox.hgrow="ALWAYS" minHeight="110"/>
+
+<StackPane fx:id="kpiConsumptionSlot" HBox.hgrow="ALWAYS" minHeight="110"/>
+
+<StackPane fx:id="kpiScoreSlot" HBox.hgrow="ALWAYS" minHeight="110"/>
+
+<StackPane fx:id="kpiEquipmentSlot" HBox.hgrow="ALWAYS" minHeight="110"/>
+
+</HBox>
+
+<!-- ── Row 4 : Battery / Network / AI decision ───────────────── -->
+
+<HBox spacing="16">
+
+<!-- Battery gauge component slot -->
+
+<StackPane fx:id="batterySlot" HBox.hgrow="ALWAYS" minHeight="140"/>
+
+<!-- Network card (inline) -->
+
+<VBox styleClass="glass-card" HBox.hgrow="ALWAYS"
+
+spacing="10" style="-fx-padding: 20;">
+
+<Label text="État réseau électrique" styleClass="card-title-muted"/>
+
+<HBox alignment="CENTER_LEFT" spacing="8">
+
+<Circle fx:id="networkDot" radius="5"
+
+style="-fx-fill: #22D3A5;
+
+-fx-effect: dropshadow(gaussian,rgba(34,211,165,0.6),6,0,0,0);"/>
+
+<Label fx:id="networkStatusLabel" text="Réseau disponible"
+
+style="-fx-font-size: 15px; -fx-font-weight: 700; -fx-text-fill: #22D3A5;"/>
+
+</HBox>
+
+<GridPane hgap="20" vgap="8">
+
+<Label text="Tension secteur" styleClass="data-label"
+
+GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+
+<Label fx:id="networkVoltageLabel" text="--- V" styleClass="data-value-green"
+
+GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+<Label text="Fréquence" styleClass="data-label"
+
+GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+<Label fx:id="networkFrequencyLabel" text="--- Hz" styleClass="data-value-green"
+
+GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+<Label text="Import réseau" styleClass="data-label"
+
+GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+<Label fx:id="networkImportLabel" text="--- kW" styleClass="data-value-amber"
+
+GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+</GridPane>
+
+</VBox>
+
+<!-- AI decision card component slot -->
+
+<StackPane fx:id="aiDecisionSlot" HBox.hgrow="ALWAYS" minHeight="140"/>
+
+</HBox>
+
+<!-- ── Row 5 : Main chart + Donut ────────────────────────────── -->
+
+<HBox spacing="16" VBox.vgrow="ALWAYS">
+
+<!-- Area chart -->
+
+<VBox styleClass="glass-card" HBox.hgrow="ALWAYS" spacing="0"
+
+style="-fx-padding: 20;">
+
+<HBox alignment="CENTER_LEFT" style="-fx-padding: 0 0 14 0;">
+
+<Label text="Production vs Consommation"
+
+styleClass="card-title"/>
+
+<Region HBox.hgrow="ALWAYS"/>
+
+<HBox spacing="4">
+
+<Button fx:id="btnDay" text="Jour" onAction="#onPeriodDay"/>
+
+<Button fx:id="btnWeek" text="Semaine" onAction="#onPeriodWeek"/>
+
+<Button fx:id="btnMonth" text="Mois" onAction="#onPeriodMonth"/>
+
+</HBox>
+
+</HBox>
+
+<HBox spacing="16" style="-fx-padding: 0 0 10 0;">
+
+<HBox alignment="CENTER_LEFT" spacing="6">
+
+<Region prefWidth="12" prefHeight="3"
+
+style="-fx-background-color: #22D3A5; -fx-background-radius: 2;"/>
+
+<Label text="Production solaire" styleClass="legend-label"/>
+
+</HBox>
+
+<HBox alignment="CENTER_LEFT" spacing="6">
+
+<Region prefWidth="12" prefHeight="3"
+
+style="-fx-background-color: #3B9DFF; -fx-background-radius: 2;"/>
+
+<Label text="Consommation" styleClass="legend-label"/>
+
+</HBox>
+
+</HBox>
+
+<AreaChart fx:id="mainChart" VBox.vgrow="ALWAYS"
+
+prefHeight="200" animated="false" legendVisible="false">
+
+<xAxis><CategoryAxis/></xAxis>
+
+<yAxis><NumberAxis/></yAxis>
+
+</AreaChart>
+
+</VBox>
+
+<!-- Donut + summary -->
+
+<VBox styleClass="glass-card" prefWidth="300" minWidth="260" spacing="0"
+
+style="-fx-padding: 20;">
+
+<Label text="Répartition énergétique" styleClass="card-title"
+
+style="-fx-padding: 0 0 14 0;"/>
+
+<PieChart fx:id="pieChart" prefHeight="150"
+
+labelsVisible="false" legendVisible="false"
+
+animated="true" VBox.vgrow="NEVER"/>
+
+<VBox spacing="8" style="-fx-padding: 12 0 0 0;">
+
+<HBox alignment="CENTER_LEFT" spacing="8">
+
+<Circle radius="5" style="-fx-fill: #22D3A5;"/>
+
+<Label text="Solaire" styleClass="data-label" HBox.hgrow="ALWAYS"/>
+
+</HBox>
+
+<HBox alignment="CENTER_LEFT" spacing="8">
+
+<Circle radius="5" style="-fx-fill: #3B9DFF;"/>
+
+<Label text="Batterie" styleClass="data-label" HBox.hgrow="ALWAYS"/>
+
+</HBox>
+
+<HBox alignment="CENTER_LEFT" spacing="8">
+
+<Circle radius="5" style="-fx-fill: #FFA53E;"/>
+
+<Label text="Réseau" styleClass="data-label" HBox.hgrow="ALWAYS"/>
+
+</HBox>
+
+</VBox>
+
+<Separator styleClass="separator-dark" style="-fx-padding: 12 0 4 0;"/>
+
+<HBox style="-fx-padding: 12 0 0 0;">
+
+<VBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="3">
+
+<Label fx:id="energySavedLabel" text="---"
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 18px;
+
+-fx-font-weight: 700; -fx-text-fill: #22D3A5;"/>
+
+<Label text="kWh économisés"
+
+style="-fx-font-size: 10px; -fx-text-fill: #8B93A7;"/>
+
+</VBox>
+
+<Separator orientation="VERTICAL" styleClass="separator-dark"/>
+
+<VBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="3">
+
+<Label fx:id="co2AvoidedLabel" text="---"
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 18px;
+
+-fx-font-weight: 700; -fx-text-fill: #22D3A5;"/>
+
+<Label text="CO₂ évité"
+
+style="-fx-font-size: 10px; -fx-text-fill: #8B93A7;"/>
+
+</VBox>
+
+</HBox>
+
+</VBox>
+
+</HBox>
+
+</VBox>

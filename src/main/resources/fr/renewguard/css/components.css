@@ -1,0 +1,205 @@
+/* ── KPI card hover ─────────────────────────────────────────────────── */
+
+.glass-hover {
+
+-fx-cursor: hand;
+
+-fx-transition: -fx-background-color 150ms;
+
+}
+
+.glass-hover:hover {
+
+-fx-background-color: rgba(255,255,255,0.03);
+
+-fx-border-color: #3B4A5E;
+
+}
+
+/* ── Legend label ───────────────────────────────────────────────────── */
+
+.legend-label {
+
+-fx-font-size: 12px;
+
+-fx-text-fill: #8B93A7;
+
+}
+
+/* ── AI decision badges ─────────────────────────────────────────────── */
+
+.badge-done {
+
+-fx-background-color: rgba(34,211,165,0.12);
+
+-fx-border-color: rgba(34,211,165,0.3);
+
+-fx-border-radius: 20;
+
+-fx-background-radius: 20;
+
+-fx-border-width: 1;
+
+-fx-text-fill: #22D3A5;
+
+-fx-font-size: 10px;
+
+-fx-font-weight: 700;
+
+-fx-padding: 2 8 2 8;
+
+-fx-letter-spacing: 0.04em;
+
+}
+
+.badge-pending {
+
+-fx-background-color: rgba(255,165,62,0.12);
+
+-fx-border-color: rgba(255,165,62,0.3);
+
+-fx-border-radius: 20;
+
+-fx-background-radius: 20;
+
+-fx-border-width: 1;
+
+-fx-text-fill: #FFA53E;
+
+-fx-font-size: 10px;
+
+-fx-font-weight: 700;
+
+-fx-padding: 2 8 2 8;
+
+-fx-letter-spacing: 0.04em;
+
+}
+
+/* ── Confidence bar ─────────────────────────────────────────────────── */
+
+.confidence-bar .bar {
+
+-fx-background-color: #22D3A5;
+
+-fx-background-radius: 2;
+
+-fx-padding: 0;
+
+}
+
+.confidence-bar .track {
+
+-fx-background-color: #1E2A3A;
+
+-fx-background-radius: 2;
+
+}
+
+.confidence-bar {
+
+-fx-pref-height: 5;
+
+-fx-max-height: 5;
+
+-fx-background-insets: 0;
+
+-fx-padding: 0;
+
+}
+
+/* ── Area chart fills ───────────────────────────────────────────────── */
+
+.chart-dark .default-color0.chart-series-area-fill {
+
+-fx-fill: linear-gradient(to bottom,
+
+rgba(34,211,165,0.28) 0%, rgba(34,211,165,0.0) 100%);
+
+}
+
+.chart-dark .default-color1.chart-series-area-fill {
+
+-fx-fill: linear-gradient(to bottom,
+
+rgba(59,157,255,0.22) 0%, rgba(59,157,255,0.0) 100%);
+
+}
+
+.chart-dark .default-color0.chart-series-area-line {
+
+-fx-stroke: #22D3A5;
+
+-fx-stroke-width: 2;
+
+}
+
+.chart-dark .default-color1.chart-series-area-line {
+
+-fx-stroke: #3B9DFF;
+
+-fx-stroke-width: 2;
+
+}
+
+.chart-dark .chart-plot-background {
+
+-fx-background-color: transparent;
+
+}
+
+.chart-dark .chart-vertical-grid-lines {
+
+-fx-stroke: transparent;
+
+}
+
+.chart-dark .chart-horizontal-grid-lines {
+
+-fx-stroke: rgba(42,51,66,0.45);
+
+-fx-stroke-dash-array: 4 4;
+
+}
+
+.chart-dark .axis {
+
+-fx-tick-label-fill: #8B93A7;
+
+-fx-minor-tick-visible: false;
+
+}
+
+.chart-dark .axis-label {
+
+-fx-text-fill: #8B93A7;
+
+}
+
+.chart-dark .chart-legend {
+
+-fx-background-color: transparent;
+
+}
+
+.chart-dark .chart-legend-item {
+
+-fx-text-fill: #8B93A7;
+
+-fx-font-size: 11px;
+
+}
+
+/* ── Pie/Donut chart ────────────────────────────────────────────────── */
+
+.pie-chart .chart-plot-background {
+
+-fx-background-color: transparent;
+
+}
+
+.pie-chart .chart-content {
+
+-fx-background-color: transparent;
+
+}

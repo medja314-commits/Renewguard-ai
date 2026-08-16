@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.Separator?>
+
+<?import javafx.scene.control.Tooltip?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+
+fx:controller="fr.renewguard.controller.PrioritiesController"
+
+spacing="14"
+
+style="-fx-padding: 24; -fx-background-color: transparent;">
+
+<HBox fx:id="modifiedBanner" alignment="CENTER_LEFT" spacing="10" visible="false" managed="false"
+
+style="-fx-background-color: rgba(255,165,62,0.11); -fx-border-color: rgba(255,165,62,0.3);
+
+-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 10 16 10 16;">
+
+<Label text="!" style="-fx-font-size: 14px; -fx-text-fill: #FFA53E; -fx-font-weight: 700;"/>
+
+<Label text="Modifications non enregistrees" HBox.hgrow="ALWAYS"
+
+style="-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #FFA53E; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Button text="Enregistrer (Ctrl+S)" onAction="#onSave"
+
+style="-fx-background-color: #FFA53E; -fx-border-color: transparent;
+
+-fx-border-radius: 7; -fx-background-radius: 7;
+
+-fx-text-fill: #0A0E14; -fx-font-size: 12px; -fx-font-weight: 700;
+
+-fx-cursor: hand; -fx-padding: 5 12 5 12;"/>
+
+</HBox>
+
+<HBox fx:id="savedBanner" alignment="CENTER_LEFT" spacing="10" visible="false" managed="false"
+
+style="-fx-background-color: rgba(34,211,165,0.09); -fx-border-color: rgba(34,211,165,0.27);
+
+-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-width: 1; -fx-padding: 10 16 10 16;">
+
+<Label text="OK" style="-fx-font-size: 12px; -fx-text-fill: #22D3A5; -fx-font-weight: 700;"/>
+
+<Label text="Priorites enregistrees - decisions IA mises a jour."
+
+style="-fx-font-size: 12px; -fx-font-weight: 500; -fx-text-fill: #22D3A5; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
+<HBox spacing="14" VBox.vgrow="ALWAYS">
+
+<VBox fx:id="dropZone1" spacing="10" HBox.hgrow="ALWAYS"
+
+style="-fx-background-color: rgba(255,77,77,0.06); -fx-border-color: rgba(255,77,77,0.22);
+
+-fx-border-radius: 16; -fx-background-radius: 16; -fx-border-width: 1; -fx-padding: 16;">
+
+<VBox spacing="3">
+
+<Label text="Niveau 1 - Critique" style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #FF4D4D;"/>
+
+<Label text="Toujours alimente" style="-fx-font-size: 11px; -fx-text-fill: #8B93A7;"/>
+
+<Label fx:id="col1Stats" text="--- W - 0 equipements"
+
+style="-fx-font-size: 11px; -fx-font-weight: 500; -fx-text-fill: #FF4D4D; -fx-font-family: 'JetBrains Mono', monospace;"/>
+
+</VBox>
+
+<Separator style="-fx-border-color: rgba(255,77,77,0.3);"/>
+
+<VBox fx:id="col1Cards" spacing="8" VBox.vgrow="ALWAYS"/>
+
+</VBox>
+
+<VBox fx:id="dropZone2" spacing="10" HBox.hgrow="ALWAYS"
+
+style="-fx-background-color: rgba(255,165,62,0.06); -fx-border-color: rgba(255,165,62,0.22);
+
+-fx-border-radius: 16; -fx-background-radius: 16; -fx-border-width: 1; -fx-padding: 16;">
+
+<VBox spacing="3">
+
+<Label text="Niveau 2 - Important" style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #FFA53E;"/>
+
+<Label text="Selon energie disponible" style="-fx-font-size: 11px; -fx-text-fill: #8B93A7;"/>
+
+<Label fx:id="col2Stats" text="--- W - 0 equipements"
+
+style="-fx-font-size: 11px; -fx-font-weight: 500; -fx-text-fill: #FFA53E; -fx-font-family: 'JetBrains Mono', monospace;"/>
+
+</VBox>
+
+<Separator style="-fx-border-color: rgba(255,165,62,0.3);"/>
+
+<VBox fx:id="col2Cards" spacing="8" VBox.vgrow="ALWAYS"/>
+
+</VBox>
+
+<VBox fx:id="dropZone3" spacing="10" HBox.hgrow="ALWAYS"
+
+style="-fx-background-color: rgba(139,147,167,0.06); -fx-border-color: rgba(139,147,167,0.18);
+
+-fx-border-radius: 16; -fx-background-radius: 16; -fx-border-width: 1; -fx-padding: 16;">
+
+<VBox spacing="3">
+
+<Label text="Niveau 3 - Non prioritaire" style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #8B93A7;"/>
+
+<Label text="Coupe en cas de penurie" style="-fx-font-size: 11px; -fx-text-fill: #8B93A7;"/>
+
+<Label fx:id="col3Stats" text="--- W - 0 equipements"
+
+style="-fx-font-size: 11px; -fx-font-weight: 500; -fx-text-fill: #8B93A7; -fx-font-family: 'JetBrains Mono', monospace;"/>
+
+</VBox>
+
+<Separator style="-fx-border-color: rgba(139,147,167,0.2);"/>
+
+<VBox fx:id="col3Cards" spacing="8" VBox.vgrow="ALWAYS"/>
+
+</VBox>
+
+<VBox fx:id="rulesContainer" prefWidth="310" minWidth="270" spacing="12"
+
+style="-fx-background-color: rgba(21,27,38,0.75); -fx-border-color: #2A3342;
+
+-fx-border-radius: 16; -fx-background-radius: 16; -fx-border-width: 1; -fx-padding: 18;">
+
+<HBox alignment="CENTER_LEFT" spacing="8">
+
+<Label text="Regles automatiques IA" HBox.hgrow="ALWAYS"
+
+style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #F5F7FA; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Button text="+ Regle" onAction="#onAddRule"
+
+style="-fx-background-color: rgba(34,211,165,0.10); -fx-border-color: rgba(34,211,165,0.3);
+
+-fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1; -fx-text-fill: #22D3A5;
+
+-fx-font-size: 11px; -fx-font-weight: 600; -fx-cursor: hand; -fx-padding: 4 10 4 10;"/>
+
+</HBox>
+
+<VBox fx:id="rulesList" spacing="8"/>
+
+</VBox>
+
+</HBox>
+
+<HBox alignment="CENTER_RIGHT" spacing="10">
+
+<Button text="Regles" onAction="#onToggleRulesPanel"
+
+style="-fx-background-color: rgba(59,157,255,0.10); -fx-border-color: rgba(59,157,255,0.3);
+
+-fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1; -fx-text-fill: #3B9DFF;
+
+-fx-font-size: 12px; -fx-cursor: hand; -fx-padding: 7 14 7 14;"/>
+
+<Region HBox.hgrow="ALWAYS"/>
+
+<Label text="Glisser-deposer pour reorganiser" style="-fx-font-size: 11px; -fx-text-fill: #8B93A7;"/>
+
+<Button text="Enregistrer" onAction="#onSave"
+
+style="-fx-background-color: linear-gradient(to bottom right, #22D3A5, #1BB88E);
+
+-fx-background-radius: 8; -fx-border-color: transparent;
+
+-fx-text-fill: #0A0E14; -fx-font-size: 13px; -fx-font-weight: 700;
+
+-fx-cursor: hand; -fx-padding: 8 18 8 18;">
+
+<tooltip><Tooltip text="Ctrl+S"/></tooltip>
+
+</Button>
+
+</HBox>
+
+</VBox>

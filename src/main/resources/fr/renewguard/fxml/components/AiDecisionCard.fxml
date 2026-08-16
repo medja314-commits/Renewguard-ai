@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+
+fx:id="cardRoot"
+
+fx:controller="fr.renewguard.component.AiDecisionCardController"
+
+styleClass="glass-card glass-hover card-glow-blue"
+
+spacing="10"
+
+style="-fx-padding: 20; -fx-border-color: rgba(59,157,255,0.3);
+
+-fx-cursor: hand;"
+
+maxWidth="Infinity">
+
+<!-- Header -->
+
+<HBox alignment="CENTER_LEFT" spacing="8">
+
+<Label fx:id="titleLabel" text="Décision IA récente"
+
+style="-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #3B9DFF;"
+
+HBox.hgrow="ALWAYS"/>
+
+<Label fx:id="statusBadge" text="EFFECTUÉ" styleClass="badge-done"/>
+
+</HBox>
+
+<!-- Action -->
+
+<Label fx:id="actionLabel" text="Chargement..."
+
+style="-fx-font-size: 13px; -fx-font-weight: 500; -fx-text-fill: #F5F7FA;"
+
+wrapText="true"/>
+
+<!-- Reason -->
+
+<Label fx:id="reasonLabel" text=""
+
+style="-fx-font-size: 12px; -fx-text-fill: #8B93A7; -fx-wrap-text: true;"
+
+wrapText="true"/>
+
+<!-- Impact -->
+
+<Label fx:id="impactLabel" text=""
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 12px;
+
+-fx-font-weight: 600; -fx-text-fill: #22D3A5;"/>
+
+<!-- Footer row -->
+
+<HBox fx:id="detailsRow" alignment="CENTER_LEFT" spacing="10">
+
+<Label fx:id="timestampLabel" text=""
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 11px;
+
+-fx-text-fill: #8B93A7;" HBox.hgrow="ALWAYS"/>
+
+<Label text="Confiance :"
+
+style="-fx-font-size: 11px; -fx-text-fill: #8B93A7;"/>
+
+<ProgressBar fx:id="confidenceBar" prefWidth="48" prefHeight="5"
+
+styleClass="confidence-bar" progress="0"/>
+
+<Label fx:id="confidenceLabel" text="---%"
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 11px;
+
+-fx-font-weight: 700; -fx-text-fill: #22D3A5;"/>
+
+</HBox>
+
+</VBox>
