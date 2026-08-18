@@ -48,6 +48,8 @@ public class EquipmentController implements Initializable {
 
 @FXML private Button chipInactive;
 
+@FXML private Button demoSectorBtn;
+
 @FXML private TableView<EquipmentDto> table;
 
 @FXML private TableColumn<EquipmentDto, String> colName;
@@ -86,11 +88,15 @@ vm.totalActiveProperty().addListener((o, old, val) -> refreshStats());
 
 vm.totalPowerWProperty().addListener((o, old, val) -> refreshStats());
 
+vm.sectorCutoffProperty().addListener((o, old, val) -> updateSectorButtonText());
+
 setActiveChip(chipAll);
 
 vm.refresh();
 
 refreshStats();
+
+updateSectorButtonText();
 
 }
 
@@ -209,5 +215,13 @@ active.getStyleClass().add("chip-active");
 @FXML private void onAdd() { /* dialog d'ajout, a implementer */ }
 
 @FXML private void onRefresh() { vm.refresh(); }
+
+@FXML private void onToggleSectorCutoff() { vm.toggleSectorCutoff(); }
+
+private void updateSectorButtonText() {
+
+demoSectorBtn.setText(vm.isSectorCutoff() ? "Rétablir le secteur" : "Simuler coupure réseau");
+
+}
 
 }

@@ -60,4 +60,10 @@ return api.delete("/equipment/" + id);
 
 }
 
+public CompletableFuture<Void> toggleSectorCutoff() {
+
+return api.post("/demo/toggle-coupure", new java.util.HashMap<>(), Void.class);
+
+}
+
 }

@@ -52,6 +52,8 @@ public class AiController implements Initializable {
 
 @FXML private Button sendBtn;
 
+@FXML private Button demoChatBtn;
+
 @FXML private HBox typingIndicator;
 
 private final AiViewModel vm = new AiViewModel();
@@ -171,5 +173,13 @@ chatMessages.getChildren().add(result.root());
 @FXML private void onSend() { vm.sendMessage(); }
 
 @FXML private void onRefresh() { vm.refresh(); }
+
+@FXML private void onDemoChatQuestion() {
+
+vm.chatInputProperty().set("Pourquoi avez-vous coupé la climatisation ?");
+
+vm.sendMessage();
+
+}
 
 }

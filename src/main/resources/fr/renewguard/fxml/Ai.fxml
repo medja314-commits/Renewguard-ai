@@ -144,6 +144,19 @@ style="-fx-background-color: transparent; -fx-background: transparent; -fx-borde
 
 </ScrollPane>
 
+<HBox spacing="6" alignment="CENTER_LEFT"
+style="-fx-padding: 6 14 6 14; -fx-background-color: rgba(255,107,107,0.10);
+-fx-border-color: rgba(255,107,107,0.3); -fx-border-width: 1 0 0 0;">
+
+<Label text="[DEMO]" style="-fx-font-size: 10px; -fx-font-weight: 700; -fx-text-fill: #FF6B6B;"/>
+
+<Button fx:id="demoChatBtn" text="Pourquoi avez-vous coupé la climatisation ?" onAction="#onDemoChatQuestion"
+style="-fx-background-color: transparent; -fx-border-color: transparent;
+-fx-text-fill: #3B9DFF; -fx-cursor: hand; -fx-font-size: 11px;
+-fx-padding: 0; -fx-underline: true; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
 <HBox fx:id="typingIndicator" alignment="CENTER_LEFT" spacing="4" visible="false" managed="false"
 
 style="-fx-padding: 4 18 4 18;">

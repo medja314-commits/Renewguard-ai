@@ -40,6 +40,8 @@ private final IntegerProperty totalActive = new SimpleIntegerProperty(0);
 
 private final IntegerProperty totalPowerW = new SimpleIntegerProperty(0);
 
+private final BooleanProperty sectorCutoff = new SimpleBooleanProperty(false);
+
 EquipmentViewModel(EquipmentService service) {
 
 this.service = service;
@@ -67,6 +69,8 @@ service.getAll()
 allEquipments.setAll(list);
 
 recalcStats();
+
+updateSectorCutoffState();
 
 loading.set(false);
 
@@ -97,6 +101,14 @@ service.setStatus(id, next).exceptionally(ex -> null);
 }
 
 public void setFilter(String filter) { activeFilter.set(filter); }
+
+public void toggleSectorCutoff() {
+
+service.toggleSectorCutoff().thenRunAsync(this::refresh, Platform::runLater)
+
+.exceptionally(ex -> { Platform.runLater(() -> errorMessage.set(ex.getMessage())); return null; });
+
+}
 
 private void applyFilter() {
 
@@ -146,6 +158,14 @@ totalActive.set(active); totalPowerW.set(power);
 
 }
 
+private void updateSectorCutoffState() {
+
+boolean hasLowPriority = allEquipments.stream().anyMatch(e -> e.getPriority() == PriorityLevel.LOW && e.getStatus() == EquipmentStatus.OFF);
+
+sectorCutoff.set(hasLowPriority);
+
+}
+
 public ObservableList<EquipmentDto> getFilteredEquipments() { return filteredEquipments; }
 
 public StringProperty searchQueryProperty() { return searchQuery; }
@@ -161,5 +181,9 @@ public int getTotalCount() { return allEquipments.size(); }
 public int getTotalActive() { return totalActive.get(); }
 
 public int getTotalPowerW() { return totalPowerW.get(); }
+
+public BooleanProperty sectorCutoffProperty() { return sectorCutoff; }
+
+public boolean isSectorCutoff() { return sectorCutoff.get(); }
 
 }

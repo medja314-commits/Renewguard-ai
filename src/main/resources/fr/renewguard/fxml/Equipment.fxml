@@ -84,6 +84,22 @@ style="-fx-background-color: rgba(255,255,255,0.04);
 
 </HBox>
 
+<HBox spacing="8" alignment="CENTER_LEFT"
+style="-fx-background-color: rgba(255,107,107,0.15); -fx-border-color: #FF6B6B;
+-fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1;
+-fx-padding: 10 14 10 14;">
+
+<Label text="[DEMO UNIQUEMENT]" style="-fx-font-size: 11px; -fx-font-weight: 700;
+-fx-text-fill: #FF6B6B; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Button fx:id="demoSectorBtn" text="Simuler coupure réseau" onAction="#onToggleSectorCutoff"
+style="-fx-background-color: #FF6B6B; -fx-background-radius: 6;
+-fx-border-color: transparent; -fx-text-fill: #FFFFFF;
+-fx-font-size: 12px; -fx-font-weight: 700; -fx-cursor: hand;
+-fx-padding: 6 12 6 12; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
 <HBox spacing="8" alignment="CENTER_LEFT">
 
 <Button fx:id="chipAll" text="Tous" onAction="#onChipAll" styleClass="chip-active"/>

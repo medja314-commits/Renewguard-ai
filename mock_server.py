@@ -50,6 +50,9 @@ app.add_middleware(
 # Délai artificiel pour que les loaders soient visibles pendant la démo
 SIMULATE_DELAY = 0.3  # secondes
 
+# [DEMO UNIQUEMENT] État de coupure réseau pour la vidéo de présentation
+secteur_coupe = False
+
 # Données équipements (varié : serveur, sécurité, éclairage, clim, imprimante)
 STATIC_EQUIPMENT = [
     {
@@ -79,7 +82,7 @@ STATIC_EQUIPMENT = [
         "name": "Climatisation Bureau A",
         "location": "Étage 1",
         "icon": "snowflake",
-        "priority": "IMPORTANT",
+        "priority": "LOW",
         "status": "ON",
         "power_watts": 2200,
         "last_activity": "2026-08-16T14:25:00",
@@ -258,16 +261,16 @@ STATIC_PRIORITIES = [
         "priority": "IMPORTANT",
         "label": "Important",
         "description": "Équipements confort et productivité",
-        "equipment_ids": [3],
-        "total_power_watts": 2200,
+        "equipment_ids": [],
+        "total_power_watts": 0,
     },
     {
         "level": 3,
         "priority": "LOW",
         "label": "Non prioritaire",
         "description": "Équipements pouvant être arrêtés en cas de besoin",
-        "equipment_ids": [4, 5],
-        "total_power_watts": 770,
+        "equipment_ids": [3, 4, 5],
+        "total_power_watts": 2970,
     },
 ]
 
@@ -321,6 +324,20 @@ async def simulate_delay():
     await asyncio.sleep(SIMULATE_DELAY)
 
 
+def apply_sector_cutoff(equipment_list):
+    """Applique la coupure secteur : équipements priorité 3 (LOW) passent à OFF."""
+    if not secteur_coupe:
+        return equipment_list
+
+    result = []
+    for eq in equipment_list:
+        eq_copy = eq.copy()
+        if eq_copy["priority"] == "LOW":
+            eq_copy["status"] = "OFF"
+        result.append(eq_copy)
+    return result
+
+
 # ============================================================================
 # AUTH ENDPOINTS
 # ============================================================================
@@ -364,7 +381,7 @@ async def energy_snapshot():
         "battery_eta": "Charge complète dans 2h30",
         "battery_charging": True,
         "battery_charge_rate_kw": 1.8,
-        "grid_available": True,
+        "grid_available": False if secteur_coupe else True,
         "grid_voltage": 230.2,
         "grid_frequency": 50.0,
         "grid_import_kw": 0.0,
@@ -409,7 +426,7 @@ async def energy_snapshot_refresh():
 async def list_equipment():
     """Liste tous les équipements."""
     await simulate_delay()
-    return list(EQUIPMENT_DB.values())
+    return apply_sector_cutoff(list(EQUIPMENT_DB.values()))
 
 
 @app.get("/equipment/{equipment_id}")
@@ -420,7 +437,10 @@ async def get_equipment(equipment_id: int):
     if equipment_id not in EQUIPMENT_DB:
         raise HTTPException(status_code=404, detail="Equipment not found")
 
-    return EQUIPMENT_DB[equipment_id]
+    eq = EQUIPMENT_DB[equipment_id].copy()
+    if secteur_coupe and eq["priority"] == "LOW":
+        eq["status"] = "OFF"
+    return eq
 
 
 @app.post("/equipment")
@@ -528,8 +548,16 @@ async def ai_chat(request: dict):
 
     message = request.get("message", "").lower()
 
+    # Cas spécial : climatisation + (pourquoi ou coupé) + coupure secteur
+    if (("climat" in message or "clim" in message) and
+        ("pourquoi" in message or "coup" in message) and
+        secteur_coupe):
+        response = "La climatisation a été coupée car le réseau est actuellement indisponible. La priorité a été donnée aux équipements critiques (serveur, sécurité) pour préserver l'autonomie de la batterie."
+    # Cas : climatisation + (pourquoi ou coupé) + pas de coupure secteur
+    elif ("climat" in message or "clim" in message) and ("pourquoi" in message or "coup" in message):
+        response = "La climatisation fonctionne normalement. Le réseau est actuellement disponible et tous les équipements restent actifs."
     # Réponses factices simples selon le contexte
-    if "batterie" in message:
+    elif "batterie" in message:
         response = "La batterie actuelle est à 73%. Elle se charge à 1.8 kW et sera pleine dans environ 2h30. Pas de soucis à prévoir."
     elif "climat" in message or "clim" in message:
         response = "La climatisation du Bureau A consomme actuellement 2200W. Sa température est stable. Je suggère une réduction de 400W pour optimiser l'énergie."
@@ -688,6 +716,39 @@ async def patch_rule(rule_id: int, partial: dict):
             return rule
 
     raise HTTPException(status_code=404, detail="Rule not found")
+
+
+# ============================================================================
+# [DEMO UNIQUEMENT] Endpoints temporaires pour la vidéo de présentation,
+# à retirer avant le vrai développement.
+# ============================================================================
+
+@app.post("/demo/toggle-coupure")
+async def demo_toggle_coupure():
+    """[DEMO UNIQUEMENT] Inverse l'état de coupure secteur pour simulation réseau."""
+    global secteur_coupe
+    await simulate_delay()
+
+    secteur_coupe = not secteur_coupe
+    return {
+        "status": "success",
+        "secteur_coupe": secteur_coupe,
+        "message": f"Secteur {'coupé' if secteur_coupe else 'disponible'}"
+    }
+
+
+@app.get("/demo/reset")
+async def demo_reset():
+    """[DEMO UNIQUEMENT] Réinitialise l'état de coupure secteur."""
+    global secteur_coupe
+    await simulate_delay()
+
+    secteur_coupe = False
+    return {
+        "status": "success",
+        "secteur_coupe": secteur_coupe,
+        "message": "État réinitialisé à la normale (secteur disponible)"
+    }
 
 
 # ============================================================================
