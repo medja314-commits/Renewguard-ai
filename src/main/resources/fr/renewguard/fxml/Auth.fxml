@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.Region?>
+
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.control.CheckBox?>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.PasswordField?>
+
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.shape.Circle?>
+
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+
+fx:controller="fr.renewguard.controller.AuthController"
+
+style="-fx-background-color: #0A0E14;"
+
+minWidth="600" minHeight="480">
+
+<Region mouseTransparent="true"
+
+prefWidth="600" prefHeight="600"
+
+style="-fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(34,211,165,0.07) 0%, transparent 100%);
+
+-fx-background-radius: 300;"/>
+
+<Region mouseTransparent="true"
+
+prefWidth="420" prefHeight="420"
+
+style="-fx-background-color: radial-gradient(center 50% 50%, radius 50%, rgba(59,157,255,0.05) 0%, transparent 100%);
+
+-fx-background-radius: 210;"
+
+StackPane.alignment="BOTTOM_RIGHT">
+
+<StackPane.margin>
+
+<Insets right="60" bottom="40"/>
+
+</StackPane.margin>
+
+</Region>
+
+<VBox alignment="CENTER_LEFT"
+
+maxWidth="420" prefWidth="420"
+
+spacing="0"
+
+style="-fx-background-color: rgba(15, 20, 32, 0.88);
+
+-fx-background-radius: 20;
+
+-fx-border-color: #2A3342;
+
+-fx-border-radius: 20;
+
+-fx-border-width: 1;
+
+-fx-padding: 40;
+
+-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.65), 48, 0, 0, 0);">
+
+<VBox alignment="CENTER" spacing="10" style="-fx-padding: 0 0 28 0;">
+
+<HBox alignment="CENTER"
+
+style="-fx-background-color: linear-gradient(to bottom right, #22D3A5, #3B9DFF);
+
+-fx-background-radius: 14;
+
+-fx-pref-width: 56; -fx-pref-height: 56;
+
+-fx-min-width: 56; -fx-min-height: 56;
+
+-fx-effect: dropshadow(gaussian, rgba(34,211,165,0.3), 24, 0, 0, 0);"
+
+maxWidth="56">
+
+<Label text="RG" style="-fx-font-size: 20px; -fx-font-weight: 700; -fx-text-fill: #0A0E14;"/>
+
+</HBox>
+
+<Label text="RenewGuard AI"
+
+style="-fx-font-size: 22px; -fx-font-weight: 700; -fx-text-fill: #F5F7FA; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Label text="Pilotage energetique intelligent"
+
+style="-fx-font-size: 13px; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sans-serif;"/>
+
+</VBox>
+
+<VBox spacing="6" style="-fx-padding: 0 0 14 0;">
+
+<Label text="Adresse e-mail"
+
+style="-fx-font-size: 12px; -fx-font-weight: 500; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sans-serif;"/>
+
+<TextField fx:id="emailField" promptText="energie@entreprise.fr" styleClass="text-field"/>
+
+</VBox>
+
+<VBox spacing="6" style="-fx-padding: 0 0 14 0;">
+
+<Label text="Mot de passe"
+
+style="-fx-font-size: 12px; -fx-font-weight: 500; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sans-serif;"/>
+
+<PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="password-field"/>
+
+</VBox>
+
+<HBox alignment="CENTER_LEFT" spacing="0" style="-fx-padding: 0 0 18 0;">
+
+<CheckBox fx:id="rememberMeBox" text="Rester connecte" selected="true"
+
+style="-fx-font-size: 12px; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Region HBox.hgrow="ALWAYS"/>
+
+<Label text="Mot de passe oublie ?"
+
+style="-fx-font-size: 12px; -fx-text-fill: #3B9DFF; -fx-cursor: hand; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
+<HBox fx:id="errorRow" alignment="CENTER_LEFT" spacing="8" visible="false" managed="false"
+
+style="-fx-background-color: rgba(255,77,77,0.12);
+
+-fx-border-color: rgba(255,77,77,0.3);
+
+-fx-border-radius: 8; -fx-background-radius: 8;
+
+-fx-border-width: 1; -fx-padding: 8 12 8 12;">
+
+<HBox.margin><Insets bottom="14"/></HBox.margin>
+
+<Label text="!" style="-fx-font-size: 12px; -fx-text-fill: #FF4D4D; -fx-font-weight: 700;"/>
+
+<Label fx:id="errorLabel" text="" wrapText="true"
+
+style="-fx-font-size: 12px; -fx-text-fill: #FF4D4D; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
+<Button fx:id="submitBtn" maxWidth="Infinity" defaultButton="true" onAction="#onSubmit"
+
+style="-fx-background-color: linear-gradient(to bottom right, #22D3A5, #1BB88E);
+
+-fx-background-radius: 10; -fx-border-color: transparent;
+
+-fx-pref-height: 44; -fx-cursor: hand;
+
+-fx-effect: dropshadow(gaussian, rgba(34,211,165,0.28), 12, 0, 0, 2);">
+
+<graphic>
+
+<Label fx:id="submitBtnLabel" text="Se connecter"
+
+style="-fx-font-size: 14px; -fx-font-weight: 700; -fx-text-fill: #0A0E14; -fx-font-family: 'Inter', sans-serif;"/>
+
+</graphic>
+
+</Button>
+
+<HBox alignment="CENTER" spacing="6" style="-fx-padding: 18 0 0 0;">
+
+<Label text="Connexion securisee - Chiffrement de bout en bout"
+
+style="-fx-font-size: 11px; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
+</VBox>
+
+</StackPane>

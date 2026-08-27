@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.shape.Circle?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1"
+
+fx:id="itemRoot"
+
+fx:controller="fr.renewguard.component.AlertItemController"
+
+alignment="TOP_LEFT" spacing="10" maxWidth="Infinity"
+
+style="-fx-padding: 12 14 12 14;
+
+-fx-border-color: transparent transparent #1E2A3A transparent;
+
+-fx-border-width: 1;">
+
+<Circle fx:id="severityDot" radius="4" style="-fx-fill: #FF4D4D;" translateY="6"/>
+
+<VBox HBox.hgrow="ALWAYS" spacing="3" style="-fx-min-width: 0;">
+
+<Label fx:id="titleLabel" text="---" wrapText="true"
+
+style="-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #FF4D4D; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Label fx:id="descLabel" text="---" wrapText="true"
+
+style="-fx-font-size: 11px; -fx-text-fill: #8B93A7; -fx-line-spacing: 1.5; -fx-font-family: 'Inter', sans-serif;"/>
+
+<Label fx:id="suggestionLabel" text="" wrapText="true" visible="false" managed="false"
+
+style="-fx-font-size: 11px; -fx-text-fill: #3B9DFF; -fx-font-style: italic; -fx-font-family: 'Inter', sans-serif;"/>
+
+<HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 3 0 0 0;">
+
+<Label fx:id="timeLabel" text="---"
+
+style="-fx-font-family: 'JetBrains Mono', monospace; -fx-font-size: 10px; -fx-text-fill: #8B93A7;"/>
+
+<!-- resolveBtn est cable en Java dans AlertItemController.bind(), pas via onAction FXML -->
+
+<Button fx:id="resolveBtn" text="Resoudre"
+
+style="-fx-background-color: transparent;
+
+-fx-border-color: #2A3342; -fx-border-radius: 6; -fx-background-radius: 6;
+
+-fx-border-width: 1; -fx-text-fill: #8B93A7; -fx-font-size: 11px; -fx-cursor: hand;
+
+-fx-padding: 3 9 3 9; -fx-font-family: 'Inter', sans-serif;"/>
+
+</HBox>
+
+</VBox>
+
+</HBox>

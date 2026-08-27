@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.canvas.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1"
+
+fx:controller="fr.renewguard.component.BatteryGaugeController"
+
+styleClass="glass-card glass-hover"
+
+alignment="CENTER_LEFT"
+
+spacing="20"
+
+style="-fx-padding: 20; -fx-cursor: hand;"
+
+maxWidth="Infinity">
+
+<!-- Radial arc canvas -->
+
+<Canvas fx:id="gaugeCanvas" width="92" height="92"/>
+
+<!-- Text info -->
+
+<VBox spacing="4">
+
+<Label text="Batterie de stockage"
+
+style="-fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #8B93A7;"/>
+
+<Label fx:id="percentLabel" text="---%"
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 22px;
+
+-fx-font-weight: 700; -fx-text-fill: #3B9DFF;"/>
+
+<Label text="Autonomie estimée"
+
+style="-fx-font-size: 12px; -fx-text-fill: #8B93A7;"/>
+
+<Label fx:id="etaLabel" text="---"
+
+style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 20px;
+
+-fx-font-weight: 700; -fx-text-fill: #F5F7FA;"/>
+
+<Label fx:id="trendLabel" text=""
+
+style="-fx-font-size: 11px; -fx-text-fill: #22D3A5;"/>
+
+</VBox>
+
+</HBox>
