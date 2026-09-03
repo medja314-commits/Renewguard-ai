@@ -1,0 +1,225 @@
+/* ─────────────────────────────────────────────────────────────
+RenewGuard AI — ajouts CSS pour Dashboard.fxml
+Palette : #0A0E14 / #22D3A5 / #3B9DFF / #FFA53E / #FF4D4D
+JavaFX CSS uniquement — pas de transition, pas de @keyframes.
+Etats statiques :focused / :hover uniquement.
+───────────────────────────────────────────────────────────── */
+
+/* ── Cartes KPI : hover avec glow teal ─────────────────────── */
+.kpi-card:hover {
+-fx-effect: dropshadow(gaussian, rgba(34, 211, 165, 0.15), 14, 0, 0, 3);
+}
+
+/* ── Batterie critique (<20%) ───────────────────────────────── */
+/*
+Applique en Java :
+batteryCard.getStyleClass().add("battery-critical");
+Retire en Java :
+batteryCard.getStyleClass().remove("battery-critical");
+*/
+.battery-critical {
+-fx-border-color: rgba(255, 77, 77, 0.50) !important;
+-fx-border-width: 1 !important;
+-fx-effect: dropshadow(gaussian, rgba(255, 77, 77, 0.35), 12, 0, 0, 0);
+}
+
+/* ── Bouton Vue systeme ─────────────────────────────────────── */
+/*
+Le controller switche entre les deux classes :
+systemViewBtn.getStyleClass().removeAll("btn-secondary", "btn-secondary-active");
+systemViewBtn.getStyleClass().add(visible ? "btn-secondary-active" : "btn-secondary");
+*/
+.btn-secondary {
+-fx-background-color: rgba(59, 157, 255, 0.10);
+-fx-border-color: rgba(59, 157, 255, 0.30);
+-fx-border-radius: 8;
+-fx-background-radius: 8;
+-fx-border-width: 1;
+-fx-text-fill: #3B9DFF;
+-fx-font-size: 12px;
+-fx-font-weight: 600;
+-fx-font-family: 'Inter';
+-fx-cursor: hand;
+-fx-padding: 6 14 6 14;
+}
+
+.btn-secondary:hover {
+-fx-background-color: rgba(59, 157, 255, 0.16);
+-fx-border-color: rgba(59, 157, 255, 0.45);
+}
+
+.btn-secondary-active {
+-fx-background-color: rgba(59, 157, 255, 0.18);
+-fx-border-color: rgba(59, 157, 255, 0.55);
+-fx-border-radius: 8;
+-fx-background-radius: 8;
+-fx-border-width: 1;
+-fx-text-fill: #3B9DFF;
+-fx-font-size: 12px;
+-fx-font-weight: 600;
+-fx-font-family: 'Inter';
+-fx-cursor: hand;
+-fx-padding: 6 14 6 14;
+-fx-effect: dropshadow(gaussian, rgba(59, 157, 255, 0.18), 8, 0, 0, 1);
+}
+
+.btn-secondary-active:hover {
+-fx-background-color: rgba(59, 157, 255, 0.24);
+}
+
+/* ── Boutons de periode (Jour / Semaine / Mois) ─────────────── */
+/*
+Le controller switche les classes selon la selection :
+periodJour.getStyleClass().setAll("period-btn-active");
+periodSemaine.getStyleClass().setAll("period-btn");
+periodMois.getStyleClass().setAll("period-btn");
+*/
+.period-btn {
+-fx-background-color: transparent;
+-fx-border-color: #2A3342;
+-fx-border-radius: 6;
+-fx-background-radius: 6;
+-fx-border-width: 1;
+-fx-text-fill: #8B93A7;
+-fx-font-size: 12px;
+-fx-font-family: 'Inter';
+-fx-cursor: hand;
+-fx-padding: 4 10 4 10;
+}
+
+.period-btn:hover {
+-fx-border-color: rgba(34, 211, 165, 0.25);
+-fx-text-fill: #F5F7FA;
+}
+
+.period-btn-active {
+-fx-background-color: rgba(34, 211, 165, 0.15);
+-fx-border-color: rgba(34, 211, 165, 0.40);
+-fx-border-radius: 6;
+-fx-background-radius: 6;
+-fx-border-width: 1;
+-fx-text-fill: #22D3A5;
+-fx-font-size: 12px;
+-fx-font-family: 'Inter';
+-fx-cursor: hand;
+-fx-padding: 4 10 4 10;
+}
+
+/* ── AreaChart ──────────────────────────────────────────────── */
+.chart-plot-background {
+-fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+-fx-stroke: transparent;
+}
+
+.chart-horizontal-grid-lines {
+-fx-stroke: rgba(42, 51, 66, 0.4);
+-fx-stroke-dash-array: 3 3;
+}
+
+.chart-alternative-row-fill {
+-fx-fill: transparent;
+-fx-stroke: transparent;
+}
+
+.chart-border {
+-fx-stroke: transparent;
+}
+
+.axis-tick-mark,
+.axis-minor-tick-mark {
+-fx-stroke: transparent;
+}
+
+.axis {
+-fx-tick-label-fill: #8B93A7;
+-fx-font-family: 'JetBrains Mono';
+-fx-font-size: 11px;
+}
+
+/* Serie 0 = Production solaire (teal) */
+.default-color0.chart-series-area-line {
+-fx-stroke: #22D3A5;
+-fx-stroke-width: 2;
+}
+
+.default-color0.chart-series-area-fill {
+-fx-fill: rgba(34, 211, 165, 0.13);
+-fx-stroke: transparent;
+}
+
+.default-color0.chart-area-symbol {
+-fx-background-color: #22D3A5, #0A0E14;
+-fx-background-radius: 3, 2;
+-fx-padding: 3;
+}
+
+/* Serie 1 = Consommation (bleu) */
+.default-color1.chart-series-area-line {
+-fx-stroke: #3B9DFF;
+-fx-stroke-width: 2;
+}
+
+.default-color1.chart-series-area-fill {
+-fx-fill: rgba(59, 157, 255, 0.10);
+-fx-stroke: transparent;
+}
+
+.default-color1.chart-area-symbol {
+-fx-background-color: #3B9DFF, #0A0E14;
+-fx-background-radius: 3, 2;
+-fx-padding: 3;
+}
+
+/* ── PieChart (donut) ───────────────────────────────────────── */
+.chart-pie-label {
+-fx-fill: transparent;
+}
+
+.chart-pie-label-line {
+-fx-stroke: transparent;
+}
+
+/* Slices : serie 0=Solaire(teal) 1=Batterie(bleu) 2=Reseau(ambre) */
+.default-color0.chart-pie {
+-fx-pie-color: #22D3A5;
+}
+
+.default-color1.chart-pie {
+-fx-pie-color: #3B9DFF;
+}
+
+.default-color2.chart-pie {
+-fx-pie-color: #FFA53E;
+}
+
+/* ── ProgressBar confiance IA ───────────────────────────────── */
+.progress-bar .track {
+-fx-background-color: #1E2A3A;
+-fx-background-radius: 2;
+-fx-background-insets: 0;
+}
+
+.progress-bar .bar {
+-fx-background-color: #22D3A5;
+-fx-background-radius: 2;
+-fx-background-insets: 0;
+-fx-effect: none;
+-fx-padding: 0;
+}
+
+/* ── Bouton fermeture banneau IA ────────────────────────────── */
+.icon-btn {
+-fx-background-color: transparent;
+-fx-border-color: transparent;
+-fx-text-fill: #8B93A7;
+-fx-cursor: hand;
+-fx-font-size: 16px;
+-fx-padding: 0 2 0 2;
+}
+
+.icon-btn:hover {
+-fx-text-fill: #F5F7FA;
+}

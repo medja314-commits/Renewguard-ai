@@ -1,0 +1,115 @@
+/* ─────────────────────────────────────────────────────────────
+RenewGuard AI — ajouts CSS pour Auth.fxml
+Palette : #0A0E14 / #22D3A5 / #3B9DFF / #FF4D4D
+JavaFX CSS uniquement — pas de transition, pas de @keyframes.
+Etats statiques :focused / :hover uniquement.
+───────────────────────────────────────────────────────────── */
+
+/* ── Champs texte (base) ───────────────────────────────────── */
+.text-field {
+-fx-background-color: rgba(255, 255, 255, 0.04);
+-fx-border-color: #2A3342;
+-fx-border-width: 1;
+-fx-border-radius: 10;
+-fx-background-radius: 10;
+-fx-padding: 11 12 11 38;
+-fx-font-size: 14px;
+-fx-font-family: 'Inter', sans-serif;
+-fx-text-fill: #F5F7FA;
+-fx-prompt-text-fill: #4A5568;
+}
+
+.password-field {
+-fx-background-color: rgba(255, 255, 255, 0.04);
+-fx-border-color: #2A3342;
+-fx-border-width: 1;
+-fx-border-radius: 10;
+-fx-background-radius: 10;
+-fx-padding: 11 40 11 38;
+-fx-font-size: 14px;
+-fx-font-family: 'Inter', sans-serif;
+-fx-text-fill: #F5F7FA;
+-fx-prompt-text-fill: #4A5568;
+}
+
+/* ── Focus states : bordure teal + halo statique ───────────── */
+.text-field:focused {
+-fx-border-color: #22D3A5;
+-fx-border-width: 1;
+-fx-effect: dropshadow(three-pass-box, rgba(34, 211, 165, 0.15), 6, 0, 0, 0);
+}
+
+.password-field:focused {
+-fx-border-color: #22D3A5;
+-fx-border-width: 1;
+-fx-effect: dropshadow(three-pass-box, rgba(34, 211, 165, 0.15), 6, 0, 0, 0);
+}
+
+/* ── Etat erreur sur les champs (a appliquer en Java via getStyleClass()) ── */
+.text-field-error {
+-fx-border-color: #FF4D4D;
+-fx-border-width: 1;
+}
+
+.text-field-valid {
+-fx-border-color: #22D3A5;
+-fx-border-width: 1;
+}
+
+/* ── Lien "Mot de passe oublie ?" ─────────────────────────── */
+.link-muted {
+-fx-text-fill: #3B9DFF;
+-fx-underline: false;
+-fx-cursor: hand;
+}
+
+.link-muted:hover {
+-fx-underline: true;
+}
+
+/* ── Bouton de connexion ───────────────────────────────────── */
+.submit-btn {
+-fx-background-color: linear-gradient(to bottom right, #22D3A5, #1BB88E);
+-fx-background-radius: 10;
+-fx-border-color: transparent;
+-fx-pref-height: 44;
+-fx-cursor: hand;
+-fx-effect: dropshadow(gaussian, rgba(34, 211, 165, 0.28), 12, 0, 0, 2);
+}
+
+.submit-btn:hover {
+-fx-background-color: linear-gradient(to bottom right, #2de8b8, #22D3A5);
+-fx-effect: dropshadow(gaussian, rgba(34, 211, 165, 0.40), 16, 0, 0, 2);
+}
+
+.submit-btn:disabled {
+-fx-background-color: rgba(34, 211, 165, 0.50);
+-fx-effect: none;
+-fx-cursor: default;
+}
+
+/* ── Checkbox "Rester connecte" ────────────────────────────── */
+.check-box .box {
+-fx-background-color: rgba(255, 255, 255, 0.04);
+-fx-border-color: #2A3342;
+-fx-border-radius: 4;
+-fx-background-radius: 4;
+}
+
+.check-box:selected .box {
+-fx-background-color: #22D3A5;
+-fx-border-color: #22D3A5;
+}
+
+.check-box:selected .mark {
+-fx-background-color: #0A0E14;
+}
+
+/* ── Bandeau d'erreur (complement FXML) ────────────────────── */
+.error-banner {
+-fx-background-color: rgba(255, 77, 77, 0.15);
+-fx-border-color: rgba(255, 77, 77, 0.35) rgba(255, 77, 77, 0.35) rgba(255, 77, 77, 0.35) #FF4D4D;
+-fx-border-width: 1 1 1 3;
+-fx-border-radius: 8;
+-fx-background-radius: 8;
+}

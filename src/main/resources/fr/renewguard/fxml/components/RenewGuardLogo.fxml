@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.SVGPath?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+fx:id="logoRoot"
+fx:controller="fr.renewguard.component.RenewGuardLogoController"
+alignment="CENTER_LEFT"
+style="-fx-background-color: transparent;">
+<HBox fx:id="outerHBox"
+alignment="CENTER_LEFT"
+StackPane.alignment="CENTER_LEFT">
+<!--
+Espace de coordonnees naturel : 0-48 (largeur) x 0-56 (hauteur).
+Le controller applique un Scale(factor, factor, 0, 0) sur iconGroup
+pour atteindre la hauteur cible : factor = desiredHeight / 56.0
+-->
+<Group fx:id="iconGroup">
+<!-- Corps du bouclier : gradient navy -> foret, bordure teal 85 % opacite -->
+<SVGPath fx:id="shieldPath"
+content="M24,3 L44,12 V36 Q44,50,24,55 Q4,50,4,36 V12 Z"
+strokeWidth="1.5"
+strokeLineJoin="ROUND">
+<fill>
+<LinearGradient startX="0.5" startY="0.0"
+endX="0.5" endY="1.0"
+proportional="true">
+<stops>
+<Stop offset="0.0" color="#1B3A5F"/>
+<Stop offset="1.0" color="#0D3127"/>
+</stops>
+</LinearGradient>
+</fill>
+<stroke>
+<Color red="0.133" green="0.827" blue="0.647" opacity="0.85"/>
+</stroke>
+</SVGPath>
+<!-- Reflet superieur (bord haut, blanc 7 % opacite) -->
+<SVGPath fx:id="highlightPath"
+content="M24,3 L44,12 L44,16 Q34,12.5,24,12.5 Q14,12.5,4,16 L4,12 Z"
+strokeWidth="0"
+opacity="0.07">
+<fill><Color red="1.0" green="1.0" blue="1.0"/></fill>
+</SVGPath>
+<!-- Connecteurs neuronaux (derriere les noeuds) -->
+<Line fx:id="nodeLine1"
+startX="15.0" startY="15.0"
+endX="24.0" endY="11.0"
+stroke="#22D3A5"
+strokeWidth="0.9"
+opacity="0.6"/>
+<Line fx:id="nodeLine2"
+startX="24.0" startY="11.0"
+endX="33.0" endY="15.0"
+stroke="#22D3A5"
+strokeWidth="0.9"
+opacity="0.6"/>
+<!-- Noeuds neuronaux : triangle en haut du bouclier -->
+<Circle fx:id="node1"
+centerX="15.0" centerY="15.0"
+radius="1.8"
+fill="#22D3A5"
+opacity="0.85"/>
+<Circle fx:id="node2"
+centerX="24.0" centerY="11.0"
+radius="2.1"
+fill="#22D3A5"/>
+<Circle fx:id="node3"
+centerX="33.0" centerY="15.0"
+radius="1.8"
+fill="#22D3A5"
+opacity="0.85"/>
+<!-- Foudre 6 points : gradient or chaud + halo DropShadow -->
+<SVGPath fx:id="lightningPath"
+content="M33,20 L24,20 L16,41 L25,41 L20,53 L38,33 Z"
+strokeWidth="0">
+<fill>
+<LinearGradient startX="0.5" startY="0.0"
+endX="0.5" endY="1.0"
+proportional="true">
+<stops>
+<Stop offset="0.0" color="#FFE066"/>
+<Stop offset="1.0" color="#F59E0B"/>
+</stops>
+</LinearGradient>
+</fill>
+<effect>
+<DropShadow radius="3.0"
+offsetX="0.0"
+offsetY="0.0"
+spread="0.0">
+<color>
+<Color red="1.0" green="0.8784" blue="0.4" opacity="0.4"/>
+</color>
+</DropShadow>
+</effect>
+</SVGPath>
+</Group>
+<!--
+Wordmark visible/managed controle par le controller.
+En mode icone seule : wordmarkContainer.setVisible(false) + setManaged(false).
+Le spacing de outerHBox est mis a jour par le controller proportionnellement
+a la hauteur cible (approximation : desiredHeight * 0.28).
+Les tailles de police sont egalement ajustees par le controller.
+-->
+<HBox fx:id="wordmarkContainer"
+alignment="CENTER_LEFT">
+<HBox.margin>
+<Insets left="13.0"/>
+</HBox.margin>
+<VBox spacing="3.0" alignment="CENTER_LEFT">
+<!-- Ligne wordmark : "RENEWGUARD" blanc + "-AI" teal -->
+<HBox spacing="0.0" alignment="CENTER_LEFT">
+<Label fx:id="wordmarkLabel"
+text="RENEWGUARD"
+style="-fx-font-family: 'Inter';
+-fx-font-weight: 800;
+-fx-font-size: 22px;
+-fx-text-fill: #F5F7FA;"/>
+<Label fx:id="wordmarkSuffixLabel"
+text="-AI"
+style="-fx-font-family: 'Inter';
+-fx-font-weight: 800;
+-fx-font-size: 22px;
+-fx-text-fill: #22D3A5;"/>
+</HBox>
+<!-- Tagline -->
+<Label fx:id="taglineLabel"
+text="Pilotage energetique intelligent"
+style="-fx-font-family: 'Inter';
+-fx-font-size: 10px;
+-fx-font-weight: 400;
+-fx-text-fill: #8B93A7;"/>
+</VBox>
+</HBox>
+</HBox>
+</StackPane>

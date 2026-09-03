@@ -1,103 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.layout.HBox?>
-
-<?import javafx.scene.layout.Region?>
-
-<?import javafx.scene.control.Button?>
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-
 fx:id="sidebarRoot"
-
 fx:controller="fr.renewguard.controller.SidebarController"
-
-prefWidth="240" minWidth="240" maxWidth="240"
-
+prefWidth="240"
+minWidth="64"
 style="-fx-background-color: #070A0F;
-
--fx-border-color: transparent #1E2A3A transparent transparent;
-
--fx-border-width: 1;">
-
-<HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20 16 16 16;">
-
-<HBox alignment="CENTER"
-
-style="-fx-background-color: linear-gradient(to bottom right, #22D3A5, #3B9DFF);
-
+-fx-border-color: #1E2A3A;
+-fx-border-width: 0 1 0 0;">
+<padding><Insets top="16" right="8" bottom="16" left="8"/></padding>
+<!-- ── Zone logo : StackPane vide, logo injecte par SidebarController ── -->
+<!--
+Le controller charge RenewGuardLogo.fxml via FXMLLoader,
+configure la hauteur (32 px), le variant (icon ou horizontal),
+puis insere le noeud dans logoSlot.getChildren() :
+logoSlot.getChildren().setAll(logoNode);
+En mode collapsed : variant=icon ; en mode expanded : variant=horizontal.
+-->
+<StackPane fx:id="logoSlot"
+alignment="CENTER_LEFT"
+minHeight="52.0">
+<padding><Insets top="8" right="10" bottom="20" left="10"/></padding>
+</StackPane>
+<!-- ── Navigation ── -->
+<VBox fx:id="navContainer" spacing="2.0" VBox.vgrow="ALWAYS">
+<HBox fx:id="navDashboard"
+styleClass="nav-item"
+alignment="CENTER_LEFT"
+spacing="12.0"
+cursor="HAND"
+userData="dashboard"
+onMouseClicked="#onNavItemClicked">
+<padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+<StackPane minWidth="18.0" minHeight="18.0" alignment="CENTER">
+<SVGPath fx:id="iconDashboard"
+content="M3,3 H10 V10 H3 Z M14,3 H21 V10 H14 Z M3,14 H10 V21 H3 Z M14,14 H21 V21 H14 Z"
+strokeWidth="0" fill="#8B93A7"/>
+</StackPane>
+<Label fx:id="labelDashboard"
+text="Dashboard"
+style="-fx-font-family: 'Inter'; -fx-font-size: 13px; -fx-text-fill: #8B93A7;"/>
+</HBox>
+<HBox fx:id="navEquipement"
+styleClass="nav-item"
+alignment="CENTER_LEFT"
+spacing="12.0"
+cursor="HAND"
+userData="equipment"
+onMouseClicked="#onNavItemClicked">
+<padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+<StackPane minWidth="18.0" minHeight="18.0" alignment="CENTER">
+<SVGPath fx:id="iconEquipement"
+content="M2,7 H22 Q24,7 24,9 V21 Q24,23 22,23 H2 Q0,23 0,21 V9 Q0,7 2,7 Z M16,7 V5 Q16,3 14,3 H10 Q8,3 8,5 V7 M12,12 V16 M10,14 H14"
+strokeWidth="1.75"
+stroke="#8B93A7"
+fill="transparent"
+strokeLineCap="ROUND"
+strokeLineJoin="ROUND"/>
+</StackPane>
+<Label fx:id="labelEquipement"
+text="Equipements"
+style="-fx-font-family: 'Inter'; -fx-font-size: 13px; -fx-text-fill: #8B93A7;"/>
+</HBox>
+<HBox fx:id="navPriorites"
+styleClass="nav-item"
+alignment="CENTER_LEFT"
+spacing="12.0"
+cursor="HAND"
+userData="priorities"
+onMouseClicked="#onNavItemClicked">
+<padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+<StackPane minWidth="18.0" minHeight="18.0" alignment="CENTER">
+<SVGPath fx:id="iconPriorites"
+content="M12,2 L15.09,8.26 L22,9.27 L17,14.14 L18.18,21.02 L12,17.77 L5.82,21.02 L7,14.14 L2,9.27 L8.91,8.26 Z"
+strokeWidth="1.75"
+stroke="#8B93A7"
+fill="transparent"
+strokeLineCap="ROUND"
+strokeLineJoin="ROUND"/>
+</StackPane>
+<Label fx:id="labelPriorites"
+text="Priorites"
+style="-fx-font-family: 'Inter'; -fx-font-size: 13px; -fx-text-fill: #8B93A7;"/>
+</HBox>
+<HBox fx:id="navIA"
+styleClass="nav-item"
+alignment="CENTER_LEFT"
+spacing="12.0"
+cursor="HAND"
+userData="ai"
+onMouseClicked="#onNavItemClicked">
+<padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+<StackPane minWidth="18.0" minHeight="18.0" alignment="CENTER">
+<SVGPath fx:id="iconIA"
+content="M12,2 A8,8 0 1 1 12,18 A8,8 0 1 1 12,2 Z M8,9 H16 M8,12 H14 M8,15 H12"
+strokeWidth="1.75"
+stroke="#8B93A7"
+fill="transparent"
+strokeLineCap="ROUND"/>
+</StackPane>
+<Label fx:id="labelIA"
+text="IA &amp; Analyse"
+style="-fx-font-family: 'Inter'; -fx-font-size: 13px; -fx-text-fill: #8B93A7;"
+HBox.hgrow="ALWAYS"/>
+<Label fx:id="badgeIA"
+text="3"
+style="-fx-font-family: 'JetBrains Mono';
+-fx-font-size: 10px;
+-fx-font-weight: 700;
+-fx-background-color: #22D3A5;
+-fx-text-fill: #0A0E14;
 -fx-background-radius: 10;
-
--fx-pref-width: 34; -fx-pref-height: 34; -fx-min-width: 34; -fx-min-height: 34;
-
--fx-effect: dropshadow(gaussian, rgba(34,211,165,0.35), 10, 0, 0, 0);">
-
-<Label text="RG" style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #0A0E14;"/>
-
+-fx-padding: 1 6 1 6;"/>
 </HBox>
-
-<VBox spacing="1">
-
-<Label text="RenewGuard"
-
-style="-fx-font-size: 13px; -fx-font-weight: 700; -fx-text-fill: #F5F7FA; -fx-font-family: 'Inter', sans-serif;"/>
-
-<Label text="AI Platform"
-
-style="-fx-font-size: 10px; -fx-text-fill: #22D3A5; -fx-font-family: 'JetBrains Mono', monospace;"/>
-
-</VBox>
-
+<HBox fx:id="navHistorique"
+styleClass="nav-item"
+alignment="CENTER_LEFT"
+spacing="12.0"
+cursor="HAND"
+userData="history"
+onMouseClicked="#onNavItemClicked">
+<padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+<StackPane minWidth="18.0" minHeight="18.0" alignment="CENTER">
+<SVGPath fx:id="iconHistorique"
+content="M12,2 A10,10 0 1 1 12,22 A10,10 0 1 1 12,2 Z M12,6 V12 L16,14"
+strokeWidth="1.75"
+stroke="#8B93A7"
+fill="transparent"
+strokeLineCap="ROUND"
+strokeLineJoin="ROUND"/>
+</StackPane>
+<Label fx:id="labelHistorique"
+text="Historique"
+style="-fx-font-family: 'Inter'; -fx-font-size: 13px; -fx-text-fill: #8B93A7;"/>
 </HBox>
-
-<Region prefHeight="1" maxHeight="1" style="-fx-background-color: #1E2A3A;" VBox.vgrow="NEVER"/>
-
-<!-- Navigation : les boutons sont cables en Java (SidebarController.initialize) via setOnAction,
-
-PAS via onAction FXML - ne pas ajouter onAction="#onNavXxx" ici, ces methodes n'existent pas. -->
-
-<VBox spacing="2" style="-fx-padding: 12 10 12 10;" VBox.vgrow="ALWAYS">
-
-<Button fx:id="navDashboard" text=" Tableau de bord" styleClass="sidebar-item-active" maxWidth="Infinity"/>
-
-<Button fx:id="navEquipment" text=" Equipements" styleClass="sidebar-item" maxWidth="Infinity"/>
-
-<Button fx:id="navPriorities" text=" Priorites" styleClass="sidebar-item" maxWidth="Infinity"/>
-
-<Button fx:id="navAi" text=" Intelligence IA" styleClass="sidebar-item" maxWidth="Infinity"/>
-
-<Button fx:id="navHistory" text=" Historique" styleClass="sidebar-item" maxWidth="Infinity"/>
-
 </VBox>
-
+<!-- Espaceur flexible -->
 <Region VBox.vgrow="ALWAYS"/>
-
-<Region prefHeight="1" maxHeight="1" style="-fx-background-color: #1E2A3A;"/>
-
-<VBox spacing="6" style="-fx-padding: 14 16 18 16;">
-
-<HBox alignment="CENTER_LEFT" spacing="8">
-
-<Circle fx:id="statusDot" radius="4"
-
-style="-fx-fill: #22D3A5; -fx-effect: dropshadow(gaussian, #22D3A5, 4, 0, 0, 0);"/>
-
-<Label text="Systeme connecte"
-
-style="-fx-font-size: 11px; -fx-font-weight: 600; -fx-text-fill: #22D3A5; -fx-font-family: 'Inter', sans-serif;"/>
-
+<!-- ── Section bas de sidebar ── -->
+<VBox fx:id="bottomSection" spacing="8.0">
+<VBox.margin><Insets top="8"/></VBox.margin>
+<!-- Separateur -->
+<Region prefHeight="1.0"
+style="-fx-background-color: #1E2A3A;"/>
+<!-- Carte statut systeme (masquee en mode collapsed) -->
+<VBox fx:id="systemStatusCard"
+spacing="3.0"
+style="-fx-background-color: rgba(34,211,165,0.08);
+-fx-border-color: rgba(34,211,165,0.2);
+-fx-border-radius: 8;
+-fx-background-radius: 8;
+-fx-border-width: 1;
+-fx-padding: 8 10 8 10;">
+<HBox alignment="CENTER_LEFT" spacing="6.0">
+<Circle fx:id="pulseDot"
+radius="3.0"
+fill="#22D3A5"
+styleClass="pulse-dot"/>
+<Label text="Systeme operationnel"
+style="-fx-font-family: 'Inter';
+-fx-font-size: 11px;
+-fx-font-weight: 500;
+-fx-text-fill: #22D3A5;"/>
 </HBox>
-
-<Label fx:id="siteNameLabel" text="Site principal"
-
-style="-fx-font-size: 11px; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sans-serif;"/>
-
+<Label fx:id="siteInfoLabel"
+text="Site : Tour Centrale · FR-IDF"
+style="-fx-font-family: 'Inter';
+-fx-font-size: 10px;
+-fx-text-fill: #8B93A7;"/>
 </VBox>
-
+<!--
+Label version bicolore.
+TextFlow permet deux segments de couleurs differentes au sein
+d'un meme conteneur inline (equivalent d'un Label bicolore).
+Le controller peut le masquer en mode collapsed :
+versionLabel.setVisible(!collapsed);
+versionLabel.setManaged(!collapsed);
+-->
+<TextFlow fx:id="versionLabel"
+style="-fx-font-family: 'JetBrains Mono';
+-fx-font-size: 10px;">
+<padding><Insets left="2"/></padding>
+<Text text="v2.4 · "
+style="-fx-fill: #8B93A7;
+-fx-font-family: 'JetBrains Mono';
+-fx-font-size: 10px;"/>
+<Text text="LIVE"
+style="-fx-fill: #22D3A5;
+-fx-font-family: 'JetBrains Mono';
+-fx-font-size: 10px;
+-fx-font-weight: bold;"/>
+</TextFlow>
+<!-- Bouton collapse / expand -->
+<HBox fx:id="collapseRow"
+styleClass="nav-item"
+alignment="CENTER_LEFT"
+spacing="8.0"
+cursor="HAND"
+onMouseClicked="#onToggleCollapse">
+<padding><Insets top="8" right="12" bottom="8" left="12"/></padding>
+<SVGPath fx:id="collapseIcon"
+content="M15,6 L9,12 L15,18"
+strokeWidth="2.0"
+stroke="#8B93A7"
+fill="transparent"
+strokeLineCap="ROUND"
+strokeLineJoin="ROUND"/>
+<Label fx:id="collapseLabel"
+text="Reduire"
+style="-fx-font-family: 'Inter'; -fx-font-size: 12px; -fx-text-fill: #8B93A7;"/>
+</HBox>
+</VBox>
 </VBox>
