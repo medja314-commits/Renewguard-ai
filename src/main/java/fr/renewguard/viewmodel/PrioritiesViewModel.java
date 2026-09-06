@@ -142,8 +142,6 @@ private ValidationResult validateMove(EquipmentDto equipment, int fromLevel, int
 
 if (fromLevel == targetLevel) return new ValidationResult(false, false, "");
 
-if (targetLevel == 1) return new ValidationResult(false, false, "");
-
 int level1Count = level1.size();
 
 if (fromLevel == 1 && level1Count == 1) {
@@ -166,21 +164,17 @@ int level1PowerAfter = (int) level1.stream()
 
 .mapToInt(EquipmentDto::getPowerWatts).sum();
 
-if (targetLevel != 1) {
-
-level1PowerAfter += 0;
-
-} else {
+if (targetLevel == 1) {
 
 level1PowerAfter += equipment.getPowerWatts();
 
-}
-
 double percentageLevel1 = (double) level1PowerAfter / totalPower * 100;
 
-if (percentageLevel1 > 80 && targetLevel == 1) {
+if (percentageLevel1 > 80) {
 
 return new ValidationResult(false, true, "La majorité de vos équipements sont classés critiques — la priorisation perd son utilité en cas de pénurie réelle.");
+
+}
 
 }
 
