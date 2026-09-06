@@ -29,7 +29,9 @@ style="-fx-background-color: rgba(7,10,15,0.95);
 <Button fx:id="globalSearchBtn" onAction="#onGlobalSearch" style="-fx-background-color: rgba(255,255,255,0.04); -fx-border-color: #2A3342; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 6 10 6 10;"/>
 <Button fx:id="notifBtn" onAction="#onToggleNotifications" style="-fx-background-color: rgba(255,255,255,0.04); -fx-border-color: #2A3342; -fx-border-radius: 8; -fx-background-radius: 8; -fx-border-width: 1; -fx-cursor: hand; -fx-padding: 6 10 6 10;"/>
 <Label fx:id="notifBadge" text="3" visible="true" style="-fx-font-family: 'JetBrains Mono'; -fx-font-size: 9px; -fx-font-weight: 700; -fx-background-color: #FF4D4D; -fx-text-fill: #FFFFFF; -fx-background-radius: 10; -fx-padding: 1 4 1 4;"/>
-<Region prefWidth="1.0" prefHeight="24.0" style="-fx-background-color: #1E2A3A;" HBox.margin="0 4 0 4"/>
+<Region prefWidth="1.0" prefHeight="24.0" style="-fx-background-color: #1E2A3A;">
+<HBox.margin><Insets left="4" right="4" top="0" bottom="0"/></HBox.margin>
+</Region>
 <Button fx:id="userMenuBtn" onAction="#onUserMenu" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand; -fx-padding: 4;"/>
 <VBox alignment="CENTER_LEFT" spacing="0" style="-fx-padding: 0 0 0 4;">
 <Label fx:id="userNameLabel" text="Admin" style="-fx-font-family: 'Inter'; -fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #F5F7FA;"/>
