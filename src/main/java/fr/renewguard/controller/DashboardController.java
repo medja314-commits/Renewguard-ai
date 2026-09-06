@@ -16,6 +16,8 @@ import fr.renewguard.viewmodel.DashboardViewModel;
 
 import javafx.collections.FXCollections;
 
+import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
@@ -60,7 +62,7 @@ public class DashboardController implements Initializable {
 
 // ── Battery / Network / AI decision slots ────────────────────────
 
-@FXML private StackPane batterySlot;
+@FXML private StackPane batteryGaugeSlot;
 
 @FXML private StackPane aiDecisionSlot;
 
@@ -124,7 +126,13 @@ bindViewModel();
 
 configureChart();
 
-configurePeriodButtons(btnDay);
+Button initialButton = (periodJour != null) ? periodJour : btnDay;
+
+if (initialButton != null) {
+
+configurePeriodButtons(initialButton);
+
+}
 
 vm.startPolling();
 
@@ -186,7 +194,7 @@ var batteryResult = FxmlLoader.<BatteryGaugeController>loadWithResult(
 
 batteryCtrl = batteryResult.controller();
 
-batterySlot.getChildren().setAll(batteryResult.root());
+batteryGaugeSlot.getChildren().setAll(batteryResult.root());
 
 var aiResult = FxmlLoader.<AiDecisionCardController>loadWithResult(
 
@@ -194,7 +202,11 @@ var aiResult = FxmlLoader.<AiDecisionCardController>loadWithResult(
 
 aiDecisionCtrl = aiResult.controller();
 
+if (aiDecisionSlot != null) {
+
 aiDecisionSlot.getChildren().setAll(aiResult.root());
+
+}
 
 }
 
@@ -420,6 +432,34 @@ data.get(2).getNode().setStyle("-fx-pie-color: #FFA53E;");
 
 // ── Period buttons ───────────────────────────────────────────────
 
+@FXML private Button periodJour;
+
+@FXML private Button periodSemaine;
+
+@FXML private Button periodMois;
+
+@FXML private void onPeriodSelected(javafx.event.ActionEvent event) {
+
+Button clicked = (Button) event.getSource();
+
+String period = (String) clicked.getUserData();
+
+if ("jour".equals(period)) {
+
+switchPeriod("day", clicked);
+
+} else if ("semaine".equals(period)) {
+
+switchPeriod("week", clicked);
+
+} else if ("mois".equals(period)) {
+
+switchPeriod("month", clicked);
+
+}
+
+}
+
 @FXML private void onPeriodDay() { switchPeriod("day", btnDay); }
 
 @FXML private void onPeriodWeek() { switchPeriod("week", btnWeek); }
@@ -428,11 +468,25 @@ data.get(2).getNode().setStyle("-fx-pie-color: #FFA53E;");
 
 private void switchPeriod(String period, Button active) {
 
+if (periodJour != null && periodSemaine != null && periodMois != null) {
+
+for (Button b : List.of(periodJour, periodSemaine, periodMois)) {
+
+b.getStyleClass().removeAll("period-btn-active");
+
+b.getStyleClass().add("period-btn");
+
+}
+
+} else if (btnDay != null && btnWeek != null && btnMonth != null) {
+
 for (Button b : List.of(btnDay, btnWeek, btnMonth)) {
 
 b.getStyleClass().removeAll("period-btn-active");
 
 b.getStyleClass().add("period-btn");
+
+}
 
 }
 
@@ -446,9 +500,17 @@ vm.changePeriod(period);
 
 private void configurePeriodButtons(Button initial) {
 
-for (Button b : List.of(btnDay, btnWeek, btnMonth))
+Button[] buttons = periodJour != null ? new Button[]{periodJour, periodSemaine, periodMois} : new Button[]{btnDay, btnWeek, btnMonth};
+
+for (Button b : buttons) {
+
+if (b != null) {
 
 b.getStyleClass().add("period-btn");
+
+}
+
+}
 
 initial.getStyleClass().remove("period-btn");
 
@@ -460,9 +522,27 @@ initial.getStyleClass().add("period-btn-active");
 
 @FXML
 
-private void onSystemViewToggle() {
+private void onToggleSystemView() {
 
 vm.toggleSystemView();
+
+}
+
+// ── AI Banner ────────────────────────────────────────────────────
+
+@FXML
+
+private void onAiBannerView() {
+
+// TODO: Navigate to AI view
+
+}
+
+@FXML
+
+private void onAiBannerClose() {
+
+// TODO: Close AI banner
 
 }
 

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Group?>
 <?import javafx.scene.shape.Line?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1"
 fx:controller="fr.renewguard.controller.DashboardController"

@@ -24,11 +24,11 @@ requires org.slf4j;
 
 requires java.prefs;
 
-opens fr.renewguard to javafx.fxml, javafx.graphics;
+opens fr.renewguard to javafx.fxml;
 
-opens fr.renewguard.controller to javafx.fxml, javafx.graphics;
+opens fr.renewguard.controller to javafx.fxml;
 
-opens fr.renewguard.component to javafx.fxml, javafx.graphics;
+opens fr.renewguard.component to javafx.fxml;
 
 opens fr.renewguard.model.dto to com.fasterxml.jackson.databind;
 
