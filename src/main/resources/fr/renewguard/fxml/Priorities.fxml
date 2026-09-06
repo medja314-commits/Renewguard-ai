@@ -18,6 +18,7 @@ style="-fx-background-color: #0A0E14;">
 <Button fx:id="addRuleBtn" text="+ Nouvelle regle" onAction="#onAddRule" style="-fx-background-color: linear-gradient(to bottom right, #22D3A5, #1BB88E); -fx-background-radius: 10; -fx-border-color: transparent; -fx-text-fill: #0A0E14; -fx-font-family: 'Inter'; -fx-font-size: 13px; -fx-font-weight: 700; -fx-cursor: hand; -fx-padding: 8 18 8 18; -fx-effect: dropshadow(gaussian, rgba(34,211,165,0.28), 10, 0, 0, 2);"/>
 </HBox>
 <HBox fx:id="kanbanWarningBanner" alignment="CENTER_LEFT" spacing="10" visible="false" managed="false" style="-fx-background-color: rgba(255,165,62,0.12); -fx-border-color: transparent transparent transparent #FFA53E; -fx-border-width: 0 0 0 3; -fx-padding: 10 16 10 16;">
+<VBox.margin><Insets left="24" right="24" bottom="12"/></VBox.margin>
 <Label text="⚠" style="-fx-font-size: 13px; -fx-text-fill: #FFA53E;"/>
 <Label fx:id="warningText" text="Attention : aucun equipement critique" wrapText="true" HBox.hgrow="ALWAYS" style="-fx-font-family: 'Inter'; -fx-font-size: 12px; -fx-font-weight: 500; -fx-text-fill: #FFA53E;"/>
 <Button fx:id="dismissWarningBtn" text="×" onAction="#onDismissWarning" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #FFA53E; -fx-font-size: 16px; -fx-cursor: hand; -fx-padding: 0 2 0 2;"/>

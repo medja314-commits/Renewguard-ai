@@ -26,6 +26,8 @@ import java.util.List;
 
 public class PrioritiesViewModel {
 
+private record ValidationResult(boolean blocked, boolean hasWarning, String message) {}
+
 private final PriorityService priorityService = PriorityService.getInstance();
 
 private final EquipmentService equipmentService = EquipmentService.getInstance();
@@ -45,6 +47,10 @@ private final BooleanProperty loading = new SimpleBooleanProperty(false);
 private final BooleanProperty saved = new SimpleBooleanProperty(false);
 
 private final StringProperty errorMsg = new SimpleStringProperty(null);
+
+private final StringProperty warningMessage = new SimpleStringProperty("");
+
+private final BooleanProperty warningVisible = new SimpleBooleanProperty(false);
 
 public void refresh() {
 
@@ -74,6 +80,20 @@ priorityService.getRules().thenAcceptAsync(rules::setAll, Platform::runLater).ex
 
 public void moveEquipment(EquipmentDto equipment, int targetLevel, int insertIndex) {
 
+int fromLevel = detectCurrentLevel(equipment);
+
+ValidationResult validation = validateMove(equipment, fromLevel, targetLevel);
+
+if (validation.blocked()) {
+
+warningMessage.set(validation.message());
+
+warningVisible.set(true);
+
+return;
+
+}
+
 removeFromAll(equipment);
 
 PriorityLevel newPriority = switch (targetLevel) {
@@ -95,6 +115,82 @@ int idx = Math.min(insertIndex, target.size());
 target.add(idx, equipment);
 
 modified.set(true); saved.set(false);
+
+if (validation.hasWarning()) {
+
+warningMessage.set(validation.message());
+
+warningVisible.set(true);
+
+}
+
+}
+
+private int detectCurrentLevel(EquipmentDto equipment) {
+
+if (level1.contains(equipment)) return 1;
+
+if (level2.contains(equipment)) return 2;
+
+if (level3.contains(equipment)) return 3;
+
+return -1;
+
+}
+
+private ValidationResult validateMove(EquipmentDto equipment, int fromLevel, int targetLevel) {
+
+if (fromLevel == targetLevel) return new ValidationResult(false, false, "");
+
+if (targetLevel == 1) return new ValidationResult(false, false, "");
+
+int level1Count = level1.size();
+
+if (fromLevel == 1 && level1Count == 1) {
+
+return new ValidationResult(true, false, "Le Niveau 1 (Critique) ne peut pas être vidé complètement. Au moins un équipement critique est obligatoire.");
+
+}
+
+int totalPower = (int) level1.stream().mapToInt(EquipmentDto::getPowerWatts).sum()
+
++ (int) level2.stream().mapToInt(EquipmentDto::getPowerWatts).sum()
+
++ (int) level3.stream().mapToInt(EquipmentDto::getPowerWatts).sum();
+
+if (totalPower == 0) return new ValidationResult(false, false, "");
+
+int level1PowerAfter = (int) level1.stream()
+
+.filter(e -> e.getId() != equipment.getId())
+
+.mapToInt(EquipmentDto::getPowerWatts).sum();
+
+if (targetLevel != 1) {
+
+level1PowerAfter += 0;
+
+} else {
+
+level1PowerAfter += equipment.getPowerWatts();
+
+}
+
+double percentageLevel1 = (double) level1PowerAfter / totalPower * 100;
+
+if (percentageLevel1 > 80 && targetLevel == 1) {
+
+return new ValidationResult(false, true, "La majorité de vos équipements sont classés critiques — la priorisation perd son utilité en cas de pénurie réelle.");
+
+}
+
+if (fromLevel == 1 && targetLevel == 3) {
+
+return new ValidationResult(false, true, "Vous retirez " + equipment.getName() + " de la protection critique directement vers non-prioritaire.");
+
+}
+
+return new ValidationResult(false, false, "");
 
 }
 
@@ -164,6 +260,12 @@ return dto;
 
 }
 
+public void dismissWarning() {
+
+warningVisible.set(false);
+
+}
+
 public ObservableList<EquipmentDto> getLevel1() { return level1; }
 
 public ObservableList<EquipmentDto> getLevel2() { return level2; }
@@ -175,5 +277,9 @@ public ObservableList<RuleDto> getRules() { return rules; }
 public BooleanProperty modifiedProperty() { return modified; }
 
 public BooleanProperty savedProperty() { return saved; }
+
+public StringProperty warningMessageProperty() { return warningMessage; }
+
+public BooleanProperty warningVisibleProperty() { return warningVisible; }
 
 }

@@ -1,17 +1,24 @@
 package fr.renewguard.controller;
 
+import fr.renewguard.viewmodel.PrioritiesViewModel;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PrioritiesController implements Initializable {
 
-    @FXML private Button addRuleBtn;
+    private final PrioritiesViewModel vm = new PrioritiesViewModel();
+
+    @FXML private HBox kanbanWarningBanner;
+    @FXML private Button dismissWarningBtn;
     @FXML private Label warningText;
+    @FXML private Button addRuleBtn;
     @FXML private VBox colNiveau1;
     @FXML private VBox colNiveau2;
     @FXML private VBox colNiveau3;
@@ -19,7 +26,9 @@ public class PrioritiesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Initialize priorities controller
+        kanbanWarningBanner.visibleProperty().bind(vm.warningVisibleProperty());
+        kanbanWarningBanner.managedProperty().bind(vm.warningVisibleProperty());
+        warningText.textProperty().bind(vm.warningMessageProperty());
     }
 
     @FXML
@@ -29,7 +38,7 @@ public class PrioritiesController implements Initializable {
 
     @FXML
     private void onDismissWarning() {
-        // TODO: Dismiss warning banner
+        vm.dismissWarning();
     }
 
     @FXML
