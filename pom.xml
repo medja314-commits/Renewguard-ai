@@ -38,6 +38,26 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
 <groupId>org.openjfx</groupId>
 
+<artifactId>javafx-base</artifactId>
+
+<version>${javafx.version}</version>
+
+</dependency>
+
+<dependency>
+
+<groupId>org.openjfx</groupId>
+
+<artifactId>javafx-graphics</artifactId>
+
+<version>${javafx.version}</version>
+
+</dependency>
+
+<dependency>
+
+<groupId>org.openjfx</groupId>
+
 <artifactId>javafx-controls</artifactId>
 
 <version>${javafx.version}</version>

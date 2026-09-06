@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.Initializable;
 
-import javafx.scene.control.Button;
-
 import javafx.scene.control.Label;
+
+import javafx.scene.input.MouseEvent;
+
+import javafx.scene.layout.HBox;
 
 import javafx.scene.layout.VBox;
 
@@ -24,40 +26,41 @@ public class SidebarController implements Initializable {
 
 @FXML private VBox sidebarRoot;
 
-@FXML private Label siteNameLabel;
+@FXML private Label siteInfoLabel;
 
-@FXML private Button navDashboard;
+@FXML private HBox navDashboard;
 
-@FXML private Button navEquipment;
+@FXML private HBox navEquipement;
 
-@FXML private Button navPriorities;
+@FXML private HBox navPriorites;
 
-@FXML private Button navAi;
+@FXML private HBox navIA;
 
-@FXML private Button navHistory;
+@FXML private HBox navHistorique;
 
 private Consumer<String> navigationCallback;
 
 private final SessionViewModel session = SessionViewModel.getInstance();
 
 @Override
-
 public void initialize(URL url, ResourceBundle rb) {
+	setActive("dashboard");
+}
 
-siteNameLabel.textProperty().bind(session.siteNameProperty());
+@FXML
+private void onNavItemClicked(MouseEvent event) {
+	if (event.getSource() instanceof HBox hbox) {
+		String screen = (String) hbox.getUserData();
+		if (screen != null) {
+			navigate(screen);
+			setActive(screen);
+		}
+	}
+}
 
-setActive("dashboard");
-
-navDashboard.setOnAction(e -> navigate("dashboard"));
-
-navEquipment.setOnAction(e -> navigate("equipment"));
-
-navPriorities.setOnAction(e -> navigate("priorities"));
-
-navAi.setOnAction(e -> navigate("ai"));
-
-navHistory.setOnAction(e -> navigate("history"));
-
+@FXML
+private void onToggleCollapse() {
+	// Implementation will be added if needed
 }
 
 public void setNavigationCallback(Consumer<String> callback) { this.navigationCallback = callback; }
@@ -65,31 +68,20 @@ public void setNavigationCallback(Consumer<String> callback) { this.navigationCa
 private void navigate(String screen) { if (navigationCallback != null) navigationCallback.accept(screen); }
 
 public void setActive(String screen) {
+	Map<String, HBox> items = Map.of(
+		"dashboard", navDashboard, "equipment", navEquipement,
+		"priorities", navPriorites, "ai", navIA, "history", navHistorique);
 
-Map<String, Button> buttons = Map.of(
+	items.forEach((key, item) -> {
+		item.getStyleClass().removeAll("nav-item-active");
+		item.getStyleClass().add("nav-item");
+	});
 
-"dashboard", navDashboard, "equipment", navEquipment,
-
-"priorities", navPriorities, "ai", navAi, "history", navHistory);
-
-buttons.forEach((key, btn) -> {
-
-btn.getStyleClass().removeAll("sidebar-item-active");
-
-btn.getStyleClass().add("sidebar-item");
-
-});
-
-Button active = buttons.get(screen);
-
-if (active != null) {
-
-active.getStyleClass().remove("sidebar-item");
-
-active.getStyleClass().add("sidebar-item-active");
-
-}
-
+	HBox active = items.get(screen);
+	if (active != null) {
+		active.getStyleClass().remove("nav-item");
+		active.getStyleClass().add("nav-item-active");
+	}
 }
 
 }

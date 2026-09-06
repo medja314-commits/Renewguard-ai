@@ -73,8 +73,7 @@ style="-fx-font-size: 12px; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter', sa
 <Label fx:id="forgotPasswordLabel"
 text="Mot de passe oublie ?"
 styleClass="link-muted"
-cursor="HAND"
-style="-fx-font-size: 12px; -fx-text-fill: #3B9DFF; -fx-font-family: 'Inter', sans-serif;"/>
+style="-fx-font-size: 12px; -fx-text-fill: #3B9DFF; -fx-font-family: 'Inter', sans-serif; -fx-cursor: hand;"/>
 </HBox>
 <HBox fx:id="errorRow"
 alignment="CENTER_LEFT"
