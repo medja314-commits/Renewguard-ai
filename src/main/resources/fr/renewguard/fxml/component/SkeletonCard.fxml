@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="fr.renewguard.component.SkeletonCardController"
+style="-fx-background-color: rgba(21,27,38,0.75);
+-fx-border-color: #2A3342;
+-fx-border-radius: 12;
+-fx-background-radius: 12;
+-fx-border-width: 1;">
+<VBox fx:id="skeletonRoot" spacing="10" style="-fx-padding: 14 16 14 16;">
+<Region fx:id="shimmerBar1" prefHeight="12.0" maxWidth="Infinity" style="-fx-background-color: #1E2A3A; -fx-background-radius: 4; -fx-pref-width: 9999; -fx-max-width: 60%;"/>
+<Region fx:id="shimmerBar2" prefHeight="24.0" maxWidth="Infinity" style="-fx-background-color: #1E2A3A; -fx-background-radius: 4; -fx-pref-width: 9999; -fx-max-width: 40%;"/>
+<Region fx:id="shimmerBar3" prefHeight="10.0" maxWidth="Infinity" style="-fx-background-color: #1E2A3A; -fx-background-radius: 4; -fx-pref-width: 9999; -fx-max-width: 80%;"/>
+</VBox>
+</StackPane>
