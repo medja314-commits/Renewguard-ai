@@ -260,6 +260,22 @@ warningVisible.set(false);
 
 }
 
+public void addRule(String condition) {
+
+priorityService.getRules().thenAcceptAsync(currentRules -> {
+
+refresh();
+
+}, Platform::runLater).exceptionally(ex -> {
+
+Platform.runLater(() -> errorMsg.set("Erreur lors de l'ajout de la règle"));
+
+return null;
+
+});
+
+}
+
 public ObservableList<EquipmentDto> getLevel1() { return level1; }
 
 public ObservableList<EquipmentDto> getLevel2() { return level2; }

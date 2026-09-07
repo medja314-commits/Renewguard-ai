@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ListCell?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="fr.renewguard.component.NotificationPopoverController"
+fx:id="popoverRoot"
+spacing="0"
+style="-fx-background-color: rgba(15,20,32,0.97);
+-fx-border-color: #2A3342;
+-fx-border-radius: 12;
+-fx-background-radius: 12;
+-fx-border-width: 1;
+-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.70), 20, 0, 0, 4);
+-fx-pref-width: 340;
+-fx-pref-height: 380;">
+<HBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 14 16 10 16; -fx-border-color: transparent transparent #1E2A3A transparent; -fx-border-width: 0 0 1 0;">
+<Label text="Notifications" style="-fx-font-family: 'Inter'; -fx-font-size: 14px; -fx-font-weight: 600; -fx-text-fill: #F5F7FA;"/>
+<Region HBox.hgrow="ALWAYS"/>
+<Button fx:id="markAllReadBtn" text="Marquer tout" onAction="#onMarkAllRead" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #8B93A7; -fx-font-family: 'Inter'; -fx-font-size: 11px; -fx-cursor: hand; -fx-padding: 0;"/>
+</HBox>
+<ListView fx:id="notificationList"
+VBox.vgrow="ALWAYS"
+style="-fx-background-color: transparent;
+-fx-border-color: transparent;
+-fx-padding: 0;
+-fx-control-inner-background: transparent;
+-fx-focus-color: transparent;
+-fx-faint-focus-color: transparent;">
+<cellFactory>
+<javafx.scene.control.ListCell fx:factory="call">
+<graphic>
+<HBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 12 16 12 16; -fx-border-color: transparent transparent rgba(255,255,255,0.05) transparent; -fx-border-width: 0 0 1 0;">
+<VBox spacing="2" HBox.hgrow="ALWAYS">
+<Label text="AlertTitle" style="-fx-font-family: 'Inter'; -fx-font-size: 12px; -fx-font-weight: 600; -fx-text-fill: #F5F7FA;"/>
+<Label text="Description ici" wrapText="true" style="-fx-font-family: 'Inter'; -fx-font-size: 11px; -fx-text-fill: #8B93A7;"/>
+<Label text="Il y a 2 min" style="-fx-font-family: 'Inter'; -fx-font-size: 10px; -fx-text-fill: #4A5568;"/>
+</VBox>
+<Label text="⚠" style="-fx-font-size: 16px; -fx-text-fill: #FFA53E;"/>
+</HBox>
+</graphic>
+</javafx.scene.control.ListCell>
+</cellFactory>
+</ListView>
+<HBox alignment="CENTER" style="-fx-padding: 12 16 12 16; -fx-border-color: #1E2A3A transparent transparent transparent; -fx-border-width: 1 0 0 0;">
+<Button fx:id="viewAllBtn" text="Voir toutes les notifications" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #3B9DFF; -fx-font-family: 'Inter'; -fx-font-size: 12px; -fx-font-weight: 600; -fx-cursor: hand; -fx-padding: 8;"/>
+</HBox>
+</VBox>

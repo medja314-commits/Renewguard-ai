@@ -110,6 +110,26 @@ service.toggleSectorCutoff().thenRunAsync(this::refresh, Platform::runLater)
 
 }
 
+public void addEquipment(String name) {
+
+EquipmentDto dto = new EquipmentDto();
+
+dto.setName(name);
+
+dto.setStatus(EquipmentStatus.OFF);
+
+dto.setPriority(PriorityLevel.LOW);
+
+dto.setPowerWatts(0);
+
+service.create(dto)
+
+.thenRunAsync(this::refresh, Platform::runLater)
+
+.exceptionally(ex -> { Platform.runLater(() -> errorMessage.set("Erreur lors de la creation")); return null; });
+
+}
+
 private void applyFilter() {
 
 String query = searchQuery.get() == null ? "" : searchQuery.get().toLowerCase();
